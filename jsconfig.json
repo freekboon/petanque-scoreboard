@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~styles/*": ["src/styles/*"],
+      "~utils/*": ["src/utils/*"],
+      "~components/*": ["src/components/*"],
+      "~modules/*": ["src/modules/*"],
+      "~templates/*": ["src/templates/*"],
+      "~config/*": ["config/*"],
+      "~hooks/*": ["src/hooks/*"],
+      "~contexts/*": ["src/contexts/*"],
+      "~constants/*": ["src/constants/*"]
+    }
+  }
+}

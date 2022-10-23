@@ -1,0 +1,24 @@
+# Content Security policy
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # HTTPS only for 356 days
+    Strict-Transport-Security = '''max-age=31536000;preload;includeSubDomains;'''
+    # Disable frame embeds, turn on XSS protection filter and prevent MIME sniffing
+    X-Frame-Options = "deny"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    # Send referrer to cross origin requests
+    Referrer-Policy = "origin-when-cross-origin"
+    # Turn off some browser features and API's
+    # https://developer.chrome.com/en/docs/privacy-sandbox/permissions-policy/
+    Permissions-Policy = "camera=(), geolocation=(), microphone=()"
+    # Report-uri => reporting API & Network Error Logging
+    Report-To = '''{"group":"default", "max_age":31536000, "endpoints":[ {"url":"https://greenberry.report-uri.com/a/d/g"} ],"include_subdomains":true}'''
+    NEL= '''{"report_to":"default", "max_age":31536000, "include_subdomains":false}'''
+    # Report only policy (for testing)
+    Content-Security-Policy-Report-Only = '''
+      default-src 'self';style-src 'self' 'unsafe-inline';script-src 'self' 'unsafe-eval';
+    '''
+    # Use this header for production
+    # Content-Security-Policy =

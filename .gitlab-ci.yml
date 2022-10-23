@@ -1,0 +1,6 @@
+include:
+  - project: 'greenberrynl/config/ci'
+    # Replace either the ref (branch) for another version of the CI pipeline
+    ref: version/2.0.0
+    # Or replace the file below with a dedicated pipeline for Netlify, DatoCMS or Serverless
+    file: '/projects/templates/example.yml'

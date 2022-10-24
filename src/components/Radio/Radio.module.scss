@@ -1,0 +1,56 @@
+@use "src/styles/typography";
+@use "src/styles/palette";
+
+$transition: 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+.radio_label {
+  composes: body;
+  display: inline-flex;
+  align-items: center;
+  column-gap: .5rem;
+  cursor: pointer;
+}
+
+@each $color, $palette in palette.$brand {
+  .radio_#{$color} {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #000000;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color $transition;
+
+    &__checked {
+      @extend .radio_#{$color};
+
+      border-color: map-get($palette, main);
+      background-color: #ffffff;
+
+      .radio_dot {
+        width: .5rem;
+        height: .5rem;
+        background-color: map-get($palette, main);
+      }
+    }
+  }
+
+  .radio_dot {
+    width: 0;
+    height: 0;
+    border-radius: .5rem;
+    background-color: transparent;
+    transition: background-color $transition, width $transition, height $transition;
+  }
+}
+
+.radio_input {
+  width: 0;
+  margin: 0;
+  opacity: 0;
+}

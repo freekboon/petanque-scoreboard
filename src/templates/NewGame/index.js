@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import classes from "./NewGame.module.scss";
 import { arrayOf, shape, string } from "prop-types";
 import Checkbox from "~components/Checkbox";
+import Radio from "~components/Radio";
 
 const NewGame = ({ players }) => {
   const [teams, setTeams] = useState({ home: [], guest: [] });
+  const [rounds, setRounds] = useState(11);
 
-  const handleChange = (team) => (event) => {
+  const handleChangeTeams = (team) => (event) => {
     const playerId = event.target.value;
-
-    console.log(team);
 
     setTeams((prevState) => ({
       ...prevState,
@@ -17,6 +17,10 @@ const NewGame = ({ players }) => {
         ? prevState[team].filter((player) => player !== playerId)
         : prevState[team].concat([playerId]),
     }));
+  };
+
+  const handleChangeRounds = (event) => {
+    setRounds(parseInt(event.target.value));
   };
 
   return (
@@ -28,7 +32,7 @@ const NewGame = ({ players }) => {
           .map((player) => (
             <Checkbox
               key={`home-${player.id}`}
-              onChange={handleChange("home")}
+              onChange={handleChangeTeams("home")}
               checked={teams.home.includes(player.id)}
               label={player.name}
               value={player.id}
@@ -46,7 +50,7 @@ const NewGame = ({ players }) => {
           .map((player) => (
             <Checkbox
               key={`guest-${player.id}`}
-              onChange={handleChange("guest")}
+              onChange={handleChangeTeams("guest")}
               checked={teams.guest.includes(player.id)}
               label={player.name}
               value={player.id}
@@ -57,6 +61,18 @@ const NewGame = ({ players }) => {
             />
           ))}
       </div>
+      <hr />
+      <div>Rounds</div>
+      {[9, 11, 13].map((number) => (
+        <Radio
+          key={number.toString()}
+          onChange={handleChangeRounds}
+          name="rounds"
+          checked={number === rounds}
+          label={number.toString()}
+          value={number}
+        />
+      ))}
     </div>
   );
 };

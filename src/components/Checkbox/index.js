@@ -5,9 +5,6 @@ import Icon from "~components/Icon";
 
 const Checkbox = ({ value, checked, disabled, onChange, label, color }) => (
   <label className={classes[`checkbox_label${disabled ? "__disabled" : ""}`]}>
-    <div className={classes[`checkbox_${color}${checked ? "__checked" : ""}`]}>
-      <Icon type="check" />
-    </div>
     <input
       className={classes.checkbox_input}
       type="checkbox"
@@ -16,6 +13,9 @@ const Checkbox = ({ value, checked, disabled, onChange, label, color }) => (
       checked={checked}
       disabled={disabled}
     />
+    <div className={classes[`checkbox_${color}${checked ? "__checked" : ""}`]}>
+      <Icon type="check" />
+    </div>
     {label}
   </label>
 );

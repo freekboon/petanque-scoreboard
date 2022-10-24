@@ -1,0 +1,35 @@
+import React from "react";
+import classes from "./Radio.module.scss";
+import { bool, func, number, oneOf, oneOfType, string } from "prop-types";
+
+const Radio = ({ name, value, onChange, checked, label, color }) => (
+  <label className={classes.radio_label}>
+    <input
+      type="radio"
+      name={name}
+      value={value}
+      onChange={onChange}
+      checked={checked}
+      className={classes.radio_input}
+    />
+    <div className={classes[`radio_${color}${checked ? "__checked" : ""}`]}>
+      <div className={classes.radio_dot} />
+    </div>
+    {label}
+  </label>
+);
+
+Radio.propTypes = {
+  name: string.isRequired,
+  value: oneOfType([string, number]).isRequired,
+  onChange: func.isRequired,
+  checked: bool.isRequired,
+  label: string.isRequired,
+  color: oneOf(["primary", "secondary"]).isRequired,
+};
+
+Radio.defaultProps = {
+  color: "primary",
+};
+
+export default Radio;

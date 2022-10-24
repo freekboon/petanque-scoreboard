@@ -1,0 +1,25 @@
+$primary_family: 'Roboto', sans-serif;
+$secondary_family: 'Quicksand', sans-serif;
+
+%base {
+  margin: 0;
+}
+
+%heading_base {
+  @extend %base;
+
+  font-family: $secondary_family;
+}
+
+.h1 {
+  @extend %heading_base;
+
+  font-size: 4rem;
+  line-height: 1.2;
+}
+
+.body {
+  @extend %base;
+
+  font-family: $primary_family;
+}

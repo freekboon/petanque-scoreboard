@@ -1,12 +1,7 @@
 import React from "react";
 import { node } from "prop-types";
 
-const Layout = ({ children }) => (
-  <>
-    <h1>With a layout!</h1>
-    {children}
-  </>
-);
+const Layout = ({ children }) => <>{children}</>;
 
 Layout.propTypes = {
   children: node,

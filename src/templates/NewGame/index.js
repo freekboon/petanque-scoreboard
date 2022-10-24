@@ -3,6 +3,7 @@ import classes from "./NewGame.module.scss";
 import { arrayOf, shape, string } from "prop-types";
 import Checkbox from "~components/Checkbox";
 import Radio from "~components/Radio";
+import Button from "~components/Button";
 
 const NewGame = ({ players }) => {
   const [teams, setTeams] = useState({ home: [], guest: [] });
@@ -21,6 +22,16 @@ const NewGame = ({ players }) => {
 
   const handleChangeRounds = (event) => {
     setRounds(parseInt(event.target.value));
+  };
+
+  const start = async () => {
+    try {
+      const response = await fetch("/api/games", { method: "POST" });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Une erreur!", error);
+    }
   };
 
   return (
@@ -73,6 +84,8 @@ const NewGame = ({ players }) => {
           value={number}
         />
       ))}
+      <hr />
+      <Button onClick={start}>Start game</Button>
     </div>
   );
 };

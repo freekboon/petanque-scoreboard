@@ -8,6 +8,7 @@
       "~modules/*": ["src/modules/*"],
       "~templates/*": ["src/templates/*"],
       "~config/*": ["config/*"],
+      "~public/*": ["public/*"],
       "~hooks/*": ["src/hooks/*"],
       "~contexts/*": ["src/contexts/*"],
       "~constants/*": ["src/constants/*"]

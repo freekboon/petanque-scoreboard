@@ -1,0 +1,29 @@
+@use "src/styles/palette";
+
+.root {
+  min-height: 300vh;
+}
+.navigation {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.navigation_item {
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: map-get(palette.$grey, dark);
+  font-size: 0.75rem;
+
+  &__active {
+    @extend .navigation_item;
+
+    color: map-get(palette.$primary, main);
+  }
+}

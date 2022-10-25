@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "~components/Layout";
+import Layout from "~modules/Layout";
 
 /**
  * HOC that applies the layout to a page.

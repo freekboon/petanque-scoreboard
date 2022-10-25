@@ -22,4 +22,12 @@ $secondary_family: 'Quicksand', sans-serif;
   @extend %base;
 
   font-family: $primary_family;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  &__heavy {
+    @extend .body;
+
+    font-weight: 600;
+  }
 }

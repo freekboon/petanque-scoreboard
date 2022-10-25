@@ -28,6 +28,12 @@ $transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-size: 0.9375rem;
 }
 
+.button_disabled {
+  opacity: .5;
+  cursor: default;
+  pointer-events: none;
+}
+
 @each $color, $palette in palette.$brand {
   .button_solid_#{$color} {
     @extend %button_base;

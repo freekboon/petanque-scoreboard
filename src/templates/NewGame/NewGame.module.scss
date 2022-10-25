@@ -3,8 +3,32 @@
 
 .container {
   composes: container_md;
+  margin-bottom: 2rem;
 }
 
-.h1 {
-  composes: h1;
+.container_flex {
+  @extend .container;
+
+  display: flex;
+}
+
+.body {
+  composes: body__heavy;
+}
+
+.team {
+  width: 100%;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.rounds {
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 1rem;
 }

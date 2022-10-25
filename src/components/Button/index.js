@@ -1,13 +1,15 @@
 import React from "react";
 import classes from "./Button.module.scss";
-import { func, node, oneOf } from "prop-types";
+import { bool, func, node, oneOf } from "prop-types";
 import classnames from "~utils/classnames";
 
-const Button = ({ variant, color, size, onClick, children }) => {
+const Button = ({ variant, color, size, onClick, children, disabled }) => {
   const buttonClass = classnames(
     classes[`button_${size}`],
-    classes[`button_${variant}_${color}`]
+    classes[`button_${variant}_${color}`],
+    disabled && classes.button_disabled
   );
+
   return (
     <button className={buttonClass} onClick={onClick}>
       {children}
@@ -21,6 +23,7 @@ Button.propTypes = {
   size: oneOf(["small", "medium", "large"]).isRequired,
   onClick: func.isRequired,
   children: node.isRequired,
+  disabled: bool,
 };
 
 Button.defaultProps = {

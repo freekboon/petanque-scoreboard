@@ -1,7 +1,7 @@
-import React from "react";
 import withLayout from "~utils/withLayout";
+import HomeTemplate from "~templates/Home";
 
-const Home = () => <div>Home</div>;
+const Home = HomeTemplate;
 
 Home.propTypes = {};
 

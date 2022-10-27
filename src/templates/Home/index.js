@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Home.module.scss";
+import { arrayOf, shape, string } from "prop-types";
 
 const Home = () => (
   <div className={classes.container}>
@@ -7,6 +8,13 @@ const Home = () => (
   </div>
 );
 
-Home.propTypes = {};
+Home.propTypes = {
+  players: arrayOf(
+    shape({
+      id: string.isRequired,
+      name: string.isRequired,
+    })
+  ),
+};
 
 export default Home;

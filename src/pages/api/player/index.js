@@ -5,15 +5,16 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const players = await Player.find({});
-        res.status(200).json({ succcess: true, body: players });
+        const players = await Player.find({}, { __v: 0 });
+        res.status(200).json({ success: true, body: players });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
       }
       break;
     case "POST":
       try {
-        const player = await Player.create({ name: "Lala" });
+        const { name } = req.body;
+        const player = await Player.create({ name });
         res.status(200).json({ success: true, body: player });
       } catch (error) {
         res.status(400).json({ success: false, error: error });

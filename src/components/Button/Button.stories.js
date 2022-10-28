@@ -12,7 +12,7 @@ export default {
     disabled: false,
   },
   argTypes: {
-    ...disableControls("variant", "chidlren", "onClick"),
+    ...disableControls("variant", "children", "onClick"),
   },
 };
 

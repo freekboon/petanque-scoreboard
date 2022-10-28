@@ -3,6 +3,10 @@ import "~styles/globals.scss";
 import { any, func } from "prop-types";
 import { PlayerProvider } from "~contexts/PlayerContext";
 
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 const App = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
   const { players, ...restPageProps } = pageProps;

@@ -17,8 +17,8 @@ const Layout = ({ children }) => {
               classes[`navigation_item${asPath === "/" ? "__active" : ""}`]
             }
           >
-            <Icon type="home" />
-            <div>Home</div>
+            <Icon icon="home" size="lg" />
+            <div className={classes.navigation_label}>Home</div>
           </a>
         </Link>
         <Link href="/games">
@@ -29,8 +29,8 @@ const Layout = ({ children }) => {
               ]
             }
           >
-            <Icon type="ball" />
-            <div>Games</div>
+            <Icon icon="ball" size="lg" />
+            <div className={classes.navigation_label}>Games</div>
           </a>
         </Link>
         <Link href="/stats">
@@ -41,8 +41,8 @@ const Layout = ({ children }) => {
               ]
             }
           >
-            <Icon type="stats" />
-            <div>Stats</div>
+            <Icon icon="stats" size="lg" />
+            <div className={classes.navigation_label}>Stats</div>
           </a>
         </Link>
       </nav>

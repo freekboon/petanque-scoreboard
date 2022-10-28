@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./NewGame.module.scss";
-import { arrayOf, shape, string } from "prop-types";
 import Checkbox from "~components/Checkbox";
 import Radio from "~components/Radio";
 import Button from "~components/Button";
+import playerContext from "~contexts/PlayerContext";
 
-const NewGame = ({ players }) => {
+const NewGame = () => {
   const [teams, setTeams] = useState({ home: [], guest: [] });
-  const [rounds, setRounds] = useState(11);
+  const [rounds, setRounds] = useState(9);
+  const { players } = useContext(playerContext);
 
   const handleChangeTeams = (team) => (event) => {
     const playerId = event.target.value;
@@ -114,13 +115,6 @@ const NewGame = ({ players }) => {
   );
 };
 
-NewGame.propTypes = {
-  players: arrayOf(
-    shape({
-      id: string.isRequired,
-      name: string.isRequired,
-    })
-  ),
-};
+NewGame.propTypes = {};
 
 export default NewGame;

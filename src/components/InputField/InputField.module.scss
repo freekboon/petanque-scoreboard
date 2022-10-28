@@ -1,0 +1,46 @@
+@use "src/styles/typography";
+@use "src/styles/palette";
+
+$transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+.input_container {}
+
+.input_small {
+  padding: 8.5px 14px
+}
+
+.input_medium {
+  padding: 1rem;
+}
+
+@each $color, $palette in palette.$brand {
+  .input_label_#{$color} {
+    composes: caption;
+    color: map-get(palette.$grey, medium);
+    display: block;
+    transition: color $transition;
+    margin-bottom: .25rem;
+
+    &__focussed {
+      @extend .input_label_#{$color};
+
+      color: map-get($palette, main);
+    }
+  }
+
+  .input_#{$color} {
+    border-radius: .25rem;
+    font-family: typography.$primary_family;
+    font-size: 1rem;
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: map-get(palette.$grey, medium);
+    border: none;
+    transition: outline-color $transition, outline-width $transition;
+
+    &:focus-visible {
+      outline-color: map-get($palette, main);
+      outline-width: 2px;
+    }
+  }
+}

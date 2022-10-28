@@ -14,7 +14,7 @@ const Checkbox = ({ value, checked, disabled, onChange, label, color }) => (
       disabled={disabled}
     />
     <div className={classes[`checkbox_${color}${checked ? "__checked" : ""}`]}>
-      <Icon type="check" />
+      <Icon icon="check" />
     </div>
     {label}
   </label>

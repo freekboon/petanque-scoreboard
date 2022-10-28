@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./index";
+import disableControls from "~utils/storybook/disableControls";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -11,21 +12,7 @@ export default {
     disabled: false,
   },
   argTypes: {
-    variant: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    onClick: {
-      table: {
-        disable: true,
-      },
-    },
+    ...disableControls("variant", "chidlren", "onClick"),
   },
 };
 

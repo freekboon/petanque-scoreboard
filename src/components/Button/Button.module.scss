@@ -47,4 +47,35 @@ $transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       background-color: darken(map-get($palette, main), 10%);
     }
   }
+
+  .button_outline_#{$color} {
+    @extend %button_base;
+
+    background-color: transparent;
+    color: map-get($palette, main);
+    border-radius: .25rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: map-get($palette, main);
+    transition: color $transition, border-color $transition background-color $transition;
+
+    &:hover {
+      border-color: darken(map-get($palette, main), 10%);
+      color: darken(map-get($palette, main), 10%);
+      background-color: lighten(map-get($palette, main), 50%);
+    }
+  }
+
+  .button_text_#{$color} {
+    @extend %button_base;
+
+    background-color: transparent;
+    color: map-get($palette, main);
+    border-radius: .25rem;
+    transition: background-color $transition;
+
+    &:hover {
+      background-color: lighten(map-get($palette, main), 50%);
+    }
+  }
 }

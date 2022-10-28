@@ -18,6 +18,13 @@ $secondary_family: 'Quicksand', sans-serif;
   line-height: 1.2;
 }
 
+.h5 {
+  @extend %heading_base;
+
+  font-size: 1.5rem;
+  line-height: 1.334;
+  font-weight: 400;
+}
 .body {
   @extend %base;
 

@@ -1,0 +1,19 @@
+@use "src/styles/typography";
+.card {
+  background-color: #ffffff;
+  border-radius: .25rem;
+  box-shadow: 0 1rem 2.5rem rgba(112,144,176, 0.2);
+}
+
+.card_header {
+  padding: 1rem 1rem 0 1rem;
+}
+
+.card_title {
+  composes: h5;
+}
+
+.card_content {
+  composes: body;
+  padding: 1rem;
+}

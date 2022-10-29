@@ -5,13 +5,15 @@ import Radio from "~components/Radio";
 import Button from "~components/Button";
 import playerContext from "~contexts/PlayerContext";
 import Card from "~components/Card";
+import { useRouter } from "next/router";
 
 const initialState = { home: [], guest: [] };
 
 const NewGame = () => {
   const [teams, setTeams] = useState(initialState);
-  const [rounds, setRounds] = useState(9);
+  const [maxPoints, setMaxPoints] = useState(9);
   const { players } = useContext(playerContext);
+  const router = useRouter();
 
   const handleChangeTeams = (team) => (event) => {
     const playerId = event.target.value;
@@ -24,18 +26,30 @@ const NewGame = () => {
     }));
   };
 
-  const handleChangeRounds = (event) => {
-    setRounds(parseInt(event.target.value));
+  const handleChangePoints = (event) => {
+    setMaxPoints(parseInt(event.target.value));
   };
 
   const start = async () => {
     try {
-      const response = await fetch("/api/games", { method: "POST" });
+      const response = await fetch("/api/game", {
+        method: "POST",
+        body: JSON.stringify({
+          teams: [teams.home, teams.guest],
+          maxPoints,
+        }),
+      });
       const result = await response.json();
-      console.log(result);
+
+      return router.push(`/games/${result.body}`);
     } catch (error) {
       console.error("Une erreur!", error);
     }
+  };
+
+  const clear = () => {
+    setTeams(initialState);
+    setMaxPoints(9);
   };
 
   const playerIsUnavailable = (playerId, team) => {
@@ -54,11 +68,6 @@ const NewGame = () => {
   };
 
   const gameIsValid = teams.home.length === 2 && teams.guest.length === 2;
-
-  const clear = () => {
-    setTeams(initialState);
-    setRounds(9);
-  };
 
   return (
     <div className={classes.container}>
@@ -104,14 +113,14 @@ const NewGame = () => {
           </div>
         </div>
         <div className={classes.section}>
-          <h5 className={classes.h5}>Number of rounds</h5>
+          <h5 className={classes.h5}>Points</h5>
           <div className={classes.flex}>
             {[9, 11, 13].map((number) => (
               <Radio
                 key={number.toString()}
-                onChange={handleChangeRounds}
-                name="rounds"
-                checked={number === rounds}
+                onChange={handleChangePoints}
+                name="points"
+                checked={number === maxPoints}
                 label={number.toString()}
                 value={number}
               />

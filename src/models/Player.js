@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const player = new Schema(
+const playerSchema = new Schema(
   {
     name: {
       type: String,
@@ -17,6 +17,6 @@ const player = new Schema(
   }
 );
 
-const Player = models.Player || model("Player", player);
+const Player = models.Player || model("Player", playerSchema);
 
 export default Player;

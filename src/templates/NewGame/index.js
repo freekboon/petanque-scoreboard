@@ -4,9 +4,12 @@ import Checkbox from "~components/Checkbox";
 import Radio from "~components/Radio";
 import Button from "~components/Button";
 import playerContext from "~contexts/PlayerContext";
+import Card from "~components/Card";
+
+const initialState = { home: [], guest: [] };
 
 const NewGame = () => {
-  const [teams, setTeams] = useState({ home: [], guest: [] });
+  const [teams, setTeams] = useState(initialState);
   const [rounds, setRounds] = useState(9);
   const { players } = useContext(playerContext);
 
@@ -52,66 +55,79 @@ const NewGame = () => {
 
   const gameIsValid = teams.home.length === 2 && teams.guest.length === 2;
 
+  const clear = () => {
+    setTeams(initialState);
+    setRounds(9);
+  };
+
   return (
-    <>
-      <div className={classes.container_flex}>
-        <div className={classes.team}>
-          <div className={classes.body}>Home team</div>
-          <div className={classes.players}>
-            {players
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((player) => (
-                <Checkbox
-                  key={`home-${player.id}`}
-                  onChange={handleChangeTeams("home")}
-                  checked={teams.home.includes(player.id)}
-                  label={player.name}
-                  value={player.id}
-                  disabled={playerIsUnavailable(player.id, "home")}
-                />
-              ))}
+    <div className={classes.container}>
+      <Card>
+        <div className={classes.section}>
+          <h5 className={classes.h5}>Select team</h5>
+          <div className={classes.flex}>
+            <div className={classes.team}>
+              <div className={classes.body}>Home team</div>
+              <div className={classes.players}>
+                {players
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((player) => (
+                    <Checkbox
+                      key={`home-${player.id}`}
+                      onChange={handleChangeTeams("home")}
+                      checked={teams.home.includes(player.id)}
+                      label={player.name}
+                      value={player.id}
+                      disabled={playerIsUnavailable(player.id, "home")}
+                    />
+                  ))}
+              </div>
+            </div>
+            <div className={classes.team}>
+              <div className={classes.body}>Guest team</div>
+              <div className={classes.players}>
+                {players
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((player) => (
+                    <Checkbox
+                      key={`guest-${player.id}`}
+                      onChange={handleChangeTeams("guest")}
+                      checked={teams.guest.includes(player.id)}
+                      label={player.name}
+                      value={player.id}
+                      disabled={playerIsUnavailable(player.id, "guest")}
+                      color="secondary"
+                    />
+                  ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div className={classes.team}>
-          <div className={classes.body}>Guest team</div>
-          <div className={classes.players}>
-            {players
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((player) => (
-                <Checkbox
-                  key={`guest-${player.id}`}
-                  onChange={handleChangeTeams("guest")}
-                  checked={teams.guest.includes(player.id)}
-                  label={player.name}
-                  value={player.id}
-                  disabled={playerIsUnavailable(player.id, "guest")}
-                  color="secondary"
-                />
-              ))}
+        <div className={classes.section}>
+          <h5 className={classes.h5}>Number of rounds</h5>
+          <div className={classes.flex}>
+            {[9, 11, 13].map((number) => (
+              <Radio
+                key={number.toString()}
+                onChange={handleChangeRounds}
+                name="rounds"
+                checked={number === rounds}
+                label={number.toString()}
+                value={number}
+              />
+            ))}
           </div>
         </div>
-      </div>
-      <div className={classes.container}>
-        <div className={classes.body}>Rounds</div>
-        <div className={classes.rounds}>
-          {[9, 11, 13].map((number) => (
-            <Radio
-              key={number.toString()}
-              onChange={handleChangeRounds}
-              name="rounds"
-              checked={number === rounds}
-              label={number.toString()}
-              value={number}
-            />
-          ))}
+        <div className={classes.flex__spaced}>
+          <Button onClick={clear} variant="outline">
+            cancel
+          </Button>
+          <Button onClick={start} disabled={!gameIsValid}>
+            Start game
+          </Button>
         </div>
-      </div>
-      <div className={classes.container}>
-        <Button onClick={start} disabled={!gameIsValid}>
-          Start game
-        </Button>
-      </div>
-    </>
+      </Card>
+    </div>
   );
 };
 

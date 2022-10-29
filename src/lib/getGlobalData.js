@@ -1,5 +1,7 @@
 const getPlayers = async () => {
-  const response = await fetch(`${process.env.BASE_URL}/api/player`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/player`
+  );
   const result = await response.json();
 
   return {

@@ -1,6 +1,14 @@
 import React from "react";
 import classes from "./Radio.module.scss";
-import { bool, func, number, oneOf, oneOfType, string } from "prop-types";
+import {
+  array,
+  bool,
+  func,
+  number,
+  oneOf,
+  oneOfType,
+  string,
+} from "prop-types";
 
 const Radio = ({ value, onChange, checked, label, color }) => (
   <label className={classes.radio_label}>
@@ -19,7 +27,7 @@ const Radio = ({ value, onChange, checked, label, color }) => (
 );
 
 Radio.propTypes = {
-  value: oneOfType([string, number]).isRequired,
+  value: oneOfType([string, number, array]).isRequired,
   onChange: func.isRequired,
   checked: bool.isRequired,
   label: string.isRequired,

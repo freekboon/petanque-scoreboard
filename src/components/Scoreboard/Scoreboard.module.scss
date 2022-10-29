@@ -1,0 +1,20 @@
+@use "src/styles/typography";
+
+.scoreboard {
+  display: flex;
+  //justify-content: space-between;
+  align-items: center;
+
+}
+
+.scoreboard_team {
+  composes: body;
+
+  width: 100%;
+}
+
+.scoreboard_score {
+  composes: h5;
+
+  white-space: nowrap;
+}

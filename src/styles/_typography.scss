@@ -47,3 +47,12 @@ $secondary_family: 'Quicksand', sans-serif;
   line-height: 1.66;
   text-transform: lowercase;
 }
+
+.overline {
+  @extend %base;
+
+  font-size: .75rem;
+  line-height: 2.66;
+  text-transform: uppercase;
+  letter-spacing: 0.08333em;
+}

@@ -1,22 +1,41 @@
 import React from "react";
 import classes from "./Home.module.scss";
-import { arrayOf, shape, string } from "prop-types";
-import Link from "next/link";
+import { arrayOf, number, shape, string } from "prop-types";
+import Card from "~components/Card";
+import Scoreboard from "~components/Scoreboard";
+import Button from "~components/Button";
 
-const Home = () => (
-  <div className={classes.container}>
-    <h1 className={classes.h1}>Home</h1>
-    <Link href={"/games/635cb1572de6b9a4fb76992e"}>temp</Link>
-  </div>
-);
+const Home = ({ current, rounds }) => {
+  return (
+    <div className={classes.container}>
+      {current ? (
+        <Card className={classes.card} chip="live">
+          <Scoreboard game={current} rounds={rounds} />
+          <Button variant="text" href={`/games/${current.id}`}>
+            Check it out
+          </Button>
+        </Card>
+      ) : (
+        <div>No current game</div>
+      )}
+    </div>
+  );
+};
 
 Home.propTypes = {
-  players: arrayOf(
+  rounds: arrayOf(
     shape({
-      id: string.isRequired,
-      name: string.isRequired,
+      id: string,
+      team: arrayOf(string),
+      points: number,
     })
   ),
+  current: shape({
+    id: string.isRequired,
+    teams: arrayOf(arrayOf(string)).isRequired,
+    maxPoints: number.isRequired,
+    start: string.isRequired,
+  }),
 };
 
 export default Home;

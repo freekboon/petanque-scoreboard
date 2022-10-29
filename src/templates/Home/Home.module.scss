@@ -3,8 +3,13 @@
 
 .container {
   composes: container_md;
+  padding-top: 1rem;
 }
 
 .h1 {
   composes: h1;
+}
+
+.card {
+  margin-top: 1rem;
 }

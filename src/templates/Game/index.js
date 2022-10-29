@@ -4,32 +4,15 @@ import { arrayOf, number, shape, string } from "prop-types";
 import Card from "~components/Card";
 import PlayerContext from "~contexts/PlayerContext";
 import RoundInput from "~modules/RoundInput";
+import Scoreboard from "~components/Scoreboard";
 
 const Game = ({ game, rounds }) => {
   const { getTeamName } = useContext(PlayerContext);
 
-  const getTeamScore = (team) =>
-    rounds
-      .filter((round) =>
-        round.team.every((playerId) => team.includes(playerId))
-      )
-      .map(({ points }) => points)
-      .reduce((acc, point) => acc + point, 0);
-
   return (
     <div className={classes.container}>
       <Card className={classes.card}>
-        <div className={classes.scoreboard}>
-          <div className={classes.scoreboard_team}>
-            {getTeamName(game.teams[0])}
-          </div>
-          <div className={classes.scoreboard_score}>
-            {getTeamScore(game.teams[0])} : {getTeamScore(game.teams[1])}
-          </div>
-          <div className={classes.scoreboard_team}>
-            {getTeamName(game.teams[1])}
-          </div>
-        </div>
+        <Scoreboard game={game} rounds={rounds} />
       </Card>
       <Card className={classes.card}>
         <RoundInput teams={game.teams} gameId={game.id} />

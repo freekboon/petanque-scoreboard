@@ -1,8 +1,18 @@
 @use "src/styles/typography";
+@use "src/styles/palette";
+
 .card {
   background-color: #ffffff;
   border-radius: .25rem;
   box-shadow: 0 1rem 2.5rem rgba(112,144,176, 0.2);
+  position: relative;
+
+  &_chip {
+    @extend .card;
+
+    margin-top: 2rem;
+    padding-top: .5rem;
+  }
 }
 
 .card_header {
@@ -15,4 +25,16 @@
 
 .card_content {
   padding: 1rem;
+}
+
+.chip {
+  composes: overline;
+  padding: 0 .75rem;
+  background-color: map-get(palette.$primary, main);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 2rem;
+  color: #ffffff;
 }

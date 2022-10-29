@@ -6,9 +6,10 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const game = await Game.findById(req.query.id);
-        const rounds = await Round.find({ gameId: game.id });
-        res.status(200).json({ success: true, body: { game, rounds } });
+        const current = await Game.findOne({ end: { $exists: false } });
+        const rounds = await Round.find({ gameId: current.id });
+
+        res.status(200).json({ success: true, body: { current, rounds } });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
       }

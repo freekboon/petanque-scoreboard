@@ -1,0 +1,14 @@
+@use "src/styles/layout";
+@use "src/styles/typography";
+
+.container {
+  composes: container_md;
+}
+
+.h1 {
+  composes: h1;
+}
+
+.body {
+  composes: body;
+}

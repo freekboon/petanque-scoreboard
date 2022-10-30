@@ -1,8 +1,8 @@
-import React from "react";
 import withLayout from "~utils/withLayout";
 import getGlobalData from "~lib/getGlobalData";
+import GamesTemplate from "~templates/Games";
 
-const Games = () => <div>Games</div>;
+const Games = GamesTemplate;
 
 export const getServerSideProps = getGlobalData();
 

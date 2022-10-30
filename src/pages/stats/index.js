@@ -1,8 +1,8 @@
-import React from "react";
 import withLayout from "~utils/withLayout";
 import getGlobalData from "~lib/getGlobalData";
+import StatsTemplate from "~templates/Stats";
 
-const Stats = () => <div>Stats</div>;
+const Stats = StatsTemplate;
 
 export const getServerSideProps = getGlobalData();
 

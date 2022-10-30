@@ -47,9 +47,10 @@ const NewGame = () => {
     }
   };
 
-  const clear = () => {
+  const cancel = () => {
     setTeams(initialState);
     setMaxPoints(9);
+    router.back();
   };
 
   const playerIsUnavailable = (playerId, team) => {
@@ -128,7 +129,7 @@ const NewGame = () => {
           </div>
         </div>
         <div className={classes.flex__spaced}>
-          <Button onClick={clear} variant="outline">
+          <Button onClick={cancel} variant="outline">
             cancel
           </Button>
           <Button onClick={start} disabled={!gameIsValid}>

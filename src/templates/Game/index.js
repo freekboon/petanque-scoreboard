@@ -14,9 +14,11 @@ const Game = ({ game, rounds }) => {
       <Card className={classes.card}>
         <Scoreboard game={game} rounds={rounds} />
       </Card>
-      <Card className={classes.card}>
-        <RoundInput teams={game.teams} gameId={game.id} />
-      </Card>
+      {!game.end && (
+        <Card className={classes.card}>
+          <RoundInput teams={game.teams} gameId={game.id} />
+        </Card>
+      )}
       {rounds.length > 0 && (
         <Card className={classes.card}>
           {rounds.map((round) => (

@@ -17,23 +17,21 @@ const RoundInput = ({ teams, gameId }) => {
     setTeam("");
   };
 
-  const addRound = () => {
-    try {
-      return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
-        method: "POST",
-        body: JSON.stringify({
-          gameId,
-          team,
-          points,
-        }),
-      });
-    } catch (error) {
-      console.log("Une erreur!");
-    } finally {
-      clear();
+  const addRound = () =>
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
+      method: "POST",
+      body: JSON.stringify({
+        gameId,
+        team,
+        points,
+      }),
+    });
+
+  const handleAddRound = () =>
+    addRound().then(() => {
       router.reload();
-    }
-  };
+      clear();
+    });
 
   return (
     <>
@@ -64,7 +62,7 @@ const RoundInput = ({ teams, gameId }) => {
         <Button variant="outline" onClick={clear}>
           cancel
         </Button>
-        <Button onClick={addRound} disabled={!points || !team}>
+        <Button onClick={handleAddRound} disabled={!points || !team}>
           confirm
         </Button>
       </div>

@@ -1,5 +1,6 @@
 @use "src/styles/layout";
 @use "src/styles/typography";
+@use "src/styles/palette";
 
 .container {
   composes: container_md;
@@ -11,5 +12,23 @@
 }
 
 .card {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.caption {
+  composes: caption;
+  color: map-get(palette.$grey, dark)
+}
+
+.season_stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.season_leaderboard {
+  composes: body;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: .5rem;
 }

@@ -18,7 +18,9 @@ const Card = ({ title, children, className, chip, footer }) => {
           <h5 className={classes.card_title}>{title}</h5>
         </div>
       )}
-      <div className={classes.card_content}>{children}</div>
+      <div className={classes[`card_content${title ? "__with_header" : ""}`]}>
+        {children}
+      </div>
       {footer && <div className={classes.card_footer}>{footer}</div>}
     </div>
   );

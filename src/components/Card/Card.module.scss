@@ -10,7 +10,7 @@
   &_chip {
     @extend .card;
 
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding-top: .5rem;
   }
 }
@@ -25,10 +25,16 @@
 
 .card_content {
   padding: 1rem;
+
+  &__with_header {
+    @extend .card_content;
+
+    padding-top: 0;
+  }
 }
 
 .card_footer {
-  padding: 0 0.5rem 0.5rem;
+  padding: 0.5rem;
 }
 
 .chip {

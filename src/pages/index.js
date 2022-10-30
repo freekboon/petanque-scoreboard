@@ -4,19 +4,41 @@ import getGlobalData from "~lib/getGlobalData";
 
 const Home = HomeTemplate;
 
-export const getServerSideProps = getGlobalData(async () => {
+const getCurrentGame = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/game/current`
   );
-
   const result = await response.json();
 
-  // const { current, rounds } = result.body;
+  return {
+    current: result.body?.current || null,
+    rounds: result.body?.rounds || [],
+  };
+};
+
+const getCurrentSeason = async (year) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/season/${year}`
+  );
+  const result = await response.json();
+
+  return result.body || null;
+};
+
+export const getServerSideProps = getGlobalData(async () => {
+  const { current, rounds } = await getCurrentGame();
+
+  const year = new Date().getFullYear();
+  const season = await getCurrentSeason(year);
 
   return {
     props: {
-      current: result.body?.current || null,
-      rounds: result.body?.rounds || [],
+      season: {
+        ...season,
+        year,
+      },
+      current,
+      rounds,
     },
   };
 });

@@ -12,12 +12,14 @@ const Button = ({
   children,
   disabled,
   href,
+  wide,
 }) => {
   const buttonClass = classnames(
     classes[`button_${size}`],
     classes[`button_${variant}_${color}`],
     disabled && classes.button_disabled,
-    href && classes.button_link
+    href && classes.button_link,
+    wide && classes.button_wide
   );
 
   return href ? (
@@ -39,6 +41,7 @@ Button.propTypes = {
   href: string,
   children: node.isRequired,
   disabled: bool,
+  wide: bool,
 };
 
 Button.defaultProps = {

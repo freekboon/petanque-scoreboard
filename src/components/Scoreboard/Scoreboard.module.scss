@@ -1,8 +1,8 @@
 @use "src/styles/typography";
+@use "src/styles/palette";
 
 .scoreboard {
   display: flex;
-  //justify-content: space-between;
   align-items: center;
 
 }
@@ -17,4 +17,15 @@
   composes: h5;
 
   white-space: nowrap;
+}
+
+.details {
+  display: flex;
+  margin-top: .5rem;
+  justify-content: space-between;
+}
+
+.caption {
+  composes: caption;
+  color: map-get(palette.$grey,dark);
 }

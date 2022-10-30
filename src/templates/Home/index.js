@@ -4,19 +4,27 @@ import { arrayOf, number, shape, string } from "prop-types";
 import Card from "~components/Card";
 import Scoreboard from "~components/Scoreboard";
 import Button from "~components/Button";
+import Icon from "~components/Icon";
 
 const Home = ({ current, rounds }) => {
   return (
     <div className={classes.container}>
       {current ? (
-        <Card className={classes.card} chip="live">
+        <Card
+          className={classes.card}
+          chip="live"
+          footer={
+            <Button variant="text" href={`/games/${current.id}`} size="small">
+              Check it out <Icon icon="arrowRight" />
+            </Button>
+          }
+        >
           <Scoreboard game={current} rounds={rounds} />
-          <Button variant="text" href={`/games/${current.id}`}>
-            Check it out
-          </Button>
         </Card>
       ) : (
-        <div>No current game</div>
+        <Button href="/games/new" size="large" wide>
+          Start a new game
+        </Button>
       )}
     </div>
   );

@@ -39,4 +39,5 @@ yarn-error.log*
 .netlify
 
 # mongodb
-/data
+/database/data/*
+/database/migrate/data/*

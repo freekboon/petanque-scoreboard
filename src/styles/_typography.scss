@@ -1,5 +1,5 @@
-$primary_family: 'Roboto', sans-serif;
-$secondary_family: 'Quicksand', sans-serif;
+$primary_family: 'Source Sans Pro', sans-serif;
+$secondary_family: 'Bebas Neue', sans-serif;
 
 %base {
   margin: 0;
@@ -9,6 +9,7 @@ $secondary_family: 'Quicksand', sans-serif;
   @extend %base;
 
   font-family: $secondary_family;
+  font-weight: 400;
 }
 
 .h1 {
@@ -23,7 +24,13 @@ $secondary_family: 'Quicksand', sans-serif;
 
   font-size: 1.5rem;
   line-height: 1.334;
-  font-weight: 400;
+}
+
+.h6 {
+  @extend %heading_base;
+
+  font-size: 1rem;
+  //line-height: 1.334;
 }
 
 .body {
@@ -52,7 +59,6 @@ $secondary_family: 'Quicksand', sans-serif;
   @extend %base;
 
   font-size: .75rem;
-  line-height: 2.66;
   text-transform: uppercase;
   letter-spacing: 0.08333em;
 }

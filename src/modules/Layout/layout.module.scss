@@ -24,7 +24,6 @@
   color: map-get(palette.$grey, dark);
   transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-
   &__active {
     @extend .navigation_item;
 
@@ -33,7 +32,6 @@
 }
 
 .navigation_label {
-  composes: caption;
-  //font-size: 0.75rem;
   margin-top: .5rem;
+  composes: h6;
 }

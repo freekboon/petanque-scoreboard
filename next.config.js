@@ -1,4 +1,8 @@
-module.exports = {
+const withPWA = require("next-pwa")({
+  dest: "public",
+});
+
+module.exports = withPWA({
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
@@ -8,4 +12,4 @@ module.exports = {
 
     return config;
   },
-};
+});

@@ -41,3 +41,10 @@ yarn-error.log*
 # mongodb
 /database/data/*
 /database/migrate/data/*
+
+# PWA
+**/public/workbox-*.js
+**/public/sw.js
+**/public/worker-*.js
+/public/sw.js.map
+/public/workbox-327c579b.js.map

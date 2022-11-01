@@ -1,5 +1,6 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
+import User from "~models/User";
 
 export const authOptions = {
   providers: [
@@ -12,6 +13,16 @@ export const authOptions = {
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
+        const user = await User.findOne({ email: token.email });
+
+        if (!user) {
+          await User.create({
+            name: token.name,
+            email: token.email,
+            providerId: token.sub,
+          });
+        }
+
         token.accessToken = account.access_token;
       }
       return token;

@@ -4,11 +4,13 @@ import classes from "./layout.module.scss";
 import Link from "next/link";
 import Icon from "~components/Icon";
 import { useRouter } from "next/router";
+import Header from "./Header";
 
 const Layout = ({ children }) => {
   const { asPath } = useRouter();
   return (
     <div className={classes.root}>
+      <Header />
       {children}
       <nav className={classes.navigation}>
         <Link href="/">

@@ -5,6 +5,7 @@ import Card from "~components/Card";
 import Scoreboard from "~components/Scoreboard";
 import Button from "~components/Button";
 import Icon from "~components/Icon";
+import { signIn } from "next-auth/react";
 
 const formatDuration = (total) => {
   const minutes = total % 60;
@@ -16,6 +17,7 @@ const formatDuration = (total) => {
 const Home = ({ season, current, rounds }) => {
   return (
     <div className={classes.container}>
+      <button onClick={() => signIn()}>Sign in</button>
       {current && (
         <Card
           className={classes.card}

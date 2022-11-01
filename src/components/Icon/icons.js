@@ -5,6 +5,7 @@ import {
   faCheck,
   faAngleRight,
   faArrowRight,
+  faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 const icons = {
@@ -14,6 +15,7 @@ const icons = {
   check: faCheck,
   angleRight: faAngleRight,
   arrowRight: faArrowRight,
+  user: faCircleUser,
 };
 
 export default icons;

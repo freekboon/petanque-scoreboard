@@ -1,0 +1,16 @@
+@use "src/styles/layout";
+
+.header {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  padding: .5rem 0;
+}
+
+.container {
+  composes: container_md;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

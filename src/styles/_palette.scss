@@ -1,7 +1,8 @@
-$primary: (main: #C02942, contrast: #ffffff);
-$secondary: (main: #53777A, contrast: #ffffff);
+$primary: (main: #C62727, contrast: #ffffff);
+$secondary: (main: #F98903, contrast: #ffffff);
+$tertary: (main: #4C3232, contrast: #ffffff);
 
-$brand: (primary: $primary, secondary: $secondary);
+$brand: (primary: $primary, secondary: $secondary, tertary: $tertary);
 
 $grey: (medium: #9e9e9e, dark: #666666);
 

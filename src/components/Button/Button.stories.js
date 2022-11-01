@@ -10,9 +10,10 @@ export default {
     color: "primary",
     size: "medium",
     disabled: false,
+    wide: false,
   },
   argTypes: {
-    ...disableControls("variant", "children", "onClick"),
+    ...disableControls("variant", "children", "onClick", "href"),
   },
 };
 

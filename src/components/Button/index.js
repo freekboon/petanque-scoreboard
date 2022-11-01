@@ -35,7 +35,7 @@ const Button = ({
 
 Button.propTypes = {
   variant: oneOf(["solid", "outline", "text"]).isRequired,
-  color: oneOf(["primary", "secondary"]).isRequired,
+  color: oneOf(["primary", "secondary", "tertary"]).isRequired,
   size: oneOf(["small", "medium", "large"]).isRequired,
   onClick: func,
   href: string,

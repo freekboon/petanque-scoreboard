@@ -5,9 +5,17 @@ import Link from "next/link";
 import Icon from "~components/Icon";
 import { useRouter } from "next/router";
 import Header from "./Header";
+import { useSession } from "next-auth/react";
 
 const Layout = ({ children }) => {
-  const { asPath } = useRouter();
+  const router = useRouter();
+  const { asPath } = router;
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    router.push("/login");
+  }
+
   return (
     <div className={classes.root}>
       <Header />

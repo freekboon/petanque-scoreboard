@@ -1,0 +1,30 @@
+@use "src/styles/layout";
+@use "src/styles/palette";
+@use "src/styles/typography";
+
+.root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #424242;
+}
+
+.container {
+  composes: container_md;
+}
+
+.logo {
+  text-align: center;
+  color: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 2rem auto;
+}
+
+.h1 {
+  composes: h1;
+}
+
+.body {
+  composes: overline;
+}

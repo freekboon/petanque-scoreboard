@@ -55,13 +55,15 @@ const Home = ({ season, current, rounds }) => {
             {formatDuration(season.totalDuration)}
           </div>
         </div>
-        <div className={classes.season_leaderboard}>
-          <div>Best current player</div>
-          <div>Foo</div>
-        </div>
-        <div className={classes.season_leaderboard}>
-          <div>Best current team</div>
-          <div>Foo & Bar</div>
+        <div className={classes.season_leaderboards}>
+          <div>
+            <div className={classes.overline}>Best player:</div>
+            <div>Coming soon</div>
+          </div>
+          <div>
+            <div className={classes.overline}>Best team:</div>
+            <div>Coming soon</div>
+          </div>
         </div>
       </Card>
     </div>

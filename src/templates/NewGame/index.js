@@ -74,10 +74,10 @@ const NewGame = () => {
     <div className={classes.container}>
       <Card>
         <div className={classes.section}>
-          <h5 className={classes.h5}>Select team</h5>
+          <h5 className={classes.h5}>Teams</h5>
           <div className={classes.flex}>
             <div className={classes.team}>
-              <div className={classes.body}>Home team</div>
+              <div className={classes.overline}>Home team</div>
               <div className={classes.players}>
                 {players
                   .sort((a, b) => a.name.localeCompare(b.name))
@@ -94,7 +94,7 @@ const NewGame = () => {
               </div>
             </div>
             <div className={classes.team}>
-              <div className={classes.body}>Guest team</div>
+              <div className={classes.overline}>Guest team</div>
               <div className={classes.players}>
                 {players
                   .sort((a, b) => a.name.localeCompare(b.name))

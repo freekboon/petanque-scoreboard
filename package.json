@@ -11,8 +11,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "storybook": "start-storybook -p 6006 --no-open",
-    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006 --no-open -s ./public",
+    "build-storybook": "build-storybook -s ./public",
     "startMongo": "mongod --dbpath=./database/data",
     "migrate": "node ./database/migrate"
   },

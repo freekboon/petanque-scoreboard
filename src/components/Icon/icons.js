@@ -5,7 +5,7 @@ import {
   faCheck,
   faAngleRight,
   faArrowRight,
-  faCircleUser,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -17,7 +17,7 @@ const icons = {
   check: faCheck,
   angleRight: faAngleRight,
   arrowRight: faArrowRight,
-  user: faCircleUser,
+  user: faUser,
   google: faGoogle,
 };
 

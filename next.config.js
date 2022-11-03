@@ -5,6 +5,9 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

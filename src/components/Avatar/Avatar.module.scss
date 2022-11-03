@@ -1,0 +1,17 @@
+@use "src/styles/palette";
+@use "src/styles/typography";
+
+.avatar {
+  border-radius: 50%;
+  background-color: map-get(palette.$primary, main);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: map-get(palette.$primary, contrast);
+}
+
+.avatar_letters {
+  font-family: typography.$secondary_family;
+  line-height: 1;
+}

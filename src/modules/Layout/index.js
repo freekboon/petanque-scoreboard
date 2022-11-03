@@ -4,21 +4,24 @@ import classes from "./layout.module.scss";
 import Link from "next/link";
 import Icon from "~components/Icon";
 import { useRouter } from "next/router";
-import Header from "./Header";
 import { useSession } from "next-auth/react";
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const { asPath } = router;
-  const { status } = useSession();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      window.location.assign("/login");
+    },
+  });
 
-  if (status === "unauthenticated") {
-    router.push("/login");
+  if (status === "loading") {
+    return <div>Loading</div>;
   }
 
   return (
     <div className={classes.root}>
-      <Header />
       {children}
       <nav className={classes.navigation}>
         <Link href="/">
@@ -53,6 +56,18 @@ const Layout = ({ children }) => {
           >
             <Icon icon="stats" size="lg" />
             <div className={classes.navigation_label}>Stats</div>
+          </a>
+        </Link>
+        <Link href="/user">
+          <a
+            className={
+              classes[
+                `navigation_item${asPath.includes("/user") ? "__active" : ""}`
+              ]
+            }
+          >
+            <Icon icon="user" size="lg" />
+            <div className={classes.navigation_label}>User</div>
           </a>
         </Link>
       </nav>

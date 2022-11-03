@@ -1,0 +1,15 @@
+@use "src/styles/layout";
+@use "src/styles/typography";
+
+.container {
+  composes: container_md;
+  padding-top: 1rem;
+}
+
+.h1 {
+  composes: h1;
+}
+
+.body {
+  composes: body;
+}

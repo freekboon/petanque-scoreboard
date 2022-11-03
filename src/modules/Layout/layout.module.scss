@@ -6,6 +6,15 @@
   padding-bottom: 6rem;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: map-get(palette.$primary, main);
+
+}
+
 .navigation {
   position: fixed;
   left: 0;

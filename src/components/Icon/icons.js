@@ -6,6 +6,7 @@ import {
   faAngleRight,
   faArrowRight,
   faUser,
+  faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -19,6 +20,7 @@ const icons = {
   arrowRight: faArrowRight,
   user: faUser,
   google: faGoogle,
+  loading: faCircleNotch,
 };
 
 export default icons;

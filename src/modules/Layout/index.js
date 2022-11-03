@@ -17,7 +17,11 @@ const Layout = ({ children }) => {
   });
 
   if (status === "loading") {
-    return <div>Loading</div>;
+    return (
+      <div className={classes.loading}>
+        <Icon icon="loading" className="fa-spin fa-4x" />
+      </div>
+    );
   }
 
   return (

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { arrayOf, object, string } from "prop-types";
+import { arrayOf, bool, object, string } from "prop-types";
 import classes from "./Table.module.scss";
 import Icon from "~components/Icon";
 
-const Table = ({ columns, rows, rowKey }) => {
-  const [sortBy, setSortyBy] = useState(rowKey);
+const Table = ({ columns, rows, rowKey, defaultSort, showNumbers }) => {
+  const [sortBy, setSortyBy] = useState(defaultSort || columns[0]);
   const [ascending, setAscending] = useState(true);
 
   const handleSort = (key) => {
@@ -20,6 +20,7 @@ const Table = ({ columns, rows, rowKey }) => {
     <div className={classes.table}>
       <div className={classes.table_head}>
         <div className={classes.table_row}>
+          {showNumbers && <div className={classes.table_cell} />}
           {columns.map((column) => (
             <div
               key={column}
@@ -33,10 +34,7 @@ const Table = ({ columns, rows, rowKey }) => {
               >
                 {column}
                 {column === sortBy && (
-                  <Icon
-                    icon={ascending ? "angleDown" : "angleUp"}
-                    size="fa-xs"
-                  />
+                  <Icon icon={ascending ? "angleDown" : "angleUp"} size="xs" />
                 )}
               </button>
             </div>
@@ -55,6 +53,11 @@ const Table = ({ columns, rows, rowKey }) => {
           })
           .map((row) => (
             <div key={`row-${row[rowKey]}`} className={classes.table_row}>
+              {showNumbers && (
+                <div className={classes.table_cell}>
+                  {rows.indexOf(row) + 1}
+                </div>
+              )}
               {columns.map((column) => (
                 <div
                   key={`row-${row[0]}-${column}`}
@@ -78,6 +81,12 @@ Table.propTypes = {
   columns: arrayOf(string).isRequired,
   rows: arrayOf(object).isRequired,
   rowKey: string.isRequired,
+  defaultSort: string,
+  showNumbers: bool,
+};
+
+Table.defaultProps = {
+  showNumbers: false,
 };
 
 export default Table;

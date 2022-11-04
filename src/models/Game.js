@@ -17,6 +17,9 @@ const gameSchema = new Schema(
     end: {
       type: String,
     },
+    winner: {
+      rtpe: [String],
+    },
   },
   {
     toJSON: {

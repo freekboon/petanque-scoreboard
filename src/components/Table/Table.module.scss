@@ -1,6 +1,9 @@
+@use "src/styles/typography";
+
 .table {
   display: table;
   width: 100%;
+  font-family: typography.$primary_family;
 }
 
 .table_row {

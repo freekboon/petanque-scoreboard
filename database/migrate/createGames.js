@@ -13,6 +13,7 @@ const createGames = async () => {
         start: oldGame.startTime,
         end: oldGame.endTime,
         legacyId: oldGame._id.$oid,
+        winner: await getNewTeamId(oldGame.winner),
       });
     })
   ).then(async () => {

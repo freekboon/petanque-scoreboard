@@ -3,12 +3,15 @@
 
 .container {
   composes: container_md;
+  padding-top: 1rem;
 }
 
-.h1 {
-  composes: h1;
+.flex {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
 }
 
-.body {
-  composes: body;
+.card {
+  margin-bottom: 1rem;
 }

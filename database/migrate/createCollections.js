@@ -25,6 +25,9 @@ const createCollections = async () => {
     legacyId: {
       type: String,
     },
+    winner: {
+      type: [String],
+    },
   });
 
   const Round = await mongoose.model("Round", {

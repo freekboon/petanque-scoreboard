@@ -24,6 +24,8 @@ const Layout = ({ children }) => {
     );
   }
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className={classes.root}>
       {children}
@@ -50,7 +52,7 @@ const Layout = ({ children }) => {
             <div className={classes.navigation_label}>Games</div>
           </a>
         </Link>
-        <Link href="/stats">
+        <Link href={`/stats/${currentYear}`}>
           <a
             className={
               classes[

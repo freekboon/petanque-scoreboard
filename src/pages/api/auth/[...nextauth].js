@@ -1,6 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
 import User from "~models/User";
+import connectDB from "~lib/mongoose";
 
 export const authOptions = {
   providers: [
@@ -39,4 +40,4 @@ export const authOptions = {
   },
 };
 
-export default NextAuth(authOptions);
+export default connectDB(NextAuth(authOptions));

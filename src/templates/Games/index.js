@@ -1,12 +1,14 @@
 import React from "react";
 import classes from "./Games.module.scss";
 import { arrayOf, shape } from "prop-types";
+import Card from "~components/Card";
 
 const Games = () => {
   return (
     <div className={classes.container}>
-      <h1 className={classes.h1}>Games</h1>
-      <p>Coming soon</p>
+      <Card title="Games">
+        <p className={classes.body}>Coming soon-ish</p>
+      </Card>
     </div>
   );
 };

@@ -58,11 +58,11 @@ const Home = ({ season, current, rounds }) => {
         <div className={classes.season_leaderboards}>
           <div>
             <div className={classes.overline}>Best player:</div>
-            <div>Coming soon</div>
+            <div>Coming soon-ish</div>
           </div>
           <div>
             <div className={classes.overline}>Best team:</div>
-            <div>Coming soon</div>
+            <div>Coming soon-ish</div>
           </div>
         </div>
       </Card>

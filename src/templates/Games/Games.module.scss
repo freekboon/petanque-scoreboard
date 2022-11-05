@@ -3,10 +3,7 @@
 
 .container {
   composes: container_md;
-}
-
-.h1 {
-  composes: h1;
+  padding-top: 1rem;
 }
 
 .body {

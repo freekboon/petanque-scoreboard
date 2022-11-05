@@ -12,10 +12,6 @@ const Stats = ({ year, stats }) => {
     router.push(`/stats/${event.target.value}`);
   };
 
-  //****************************************************************
-  // Get season stats and get team stats
-  //****************************************************************
-
   return (
     <div className={classes.container}>
       <div className={classes.flex}>
@@ -30,13 +26,7 @@ const Stats = ({ year, stats }) => {
         ))}
       </div>
       <Card title="season" className={classes.card}>
-        <Table
-          columns={["name", "played", "win", "loss", "ratio"]}
-          rows={stats}
-          rowKey="name"
-          defaultSort="ratio"
-          showNumbers
-        />
+        <p className={classes.body}>Coming soon-ish</p>
       </Card>
       <Card title="players" className={classes.card}>
         <Table
@@ -48,13 +38,7 @@ const Stats = ({ year, stats }) => {
         />
       </Card>
       <Card title="teams" className={classes.card}>
-        <Table
-          columns={["name", "played", "win", "loss", "ratio"]}
-          rows={stats}
-          rowKey="name"
-          defaultSort="ratio"
-          showNumbers
-        />
+        <p className={classes.body}>Coming soon-ish</p>
       </Card>
     </div>
   );

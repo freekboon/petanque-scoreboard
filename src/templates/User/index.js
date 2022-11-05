@@ -3,6 +3,7 @@ import classes from "./User.module.scss";
 import { signOut, useSession } from "next-auth/react";
 import Avatar from "~components/Avatar";
 import Button from "~components/Button";
+import packageData from "../../../package.json";
 
 const User = () => {
   const { data } = useSession();
@@ -13,6 +14,8 @@ const User = () => {
       <Button variant="outline" onClick={() => signOut()}>
         Sign out
       </Button>
+      <hr />
+      <p className={classes.overline}>Version: {packageData.version}</p>
     </div>
   );
 };

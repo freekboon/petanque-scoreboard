@@ -1,5 +1,6 @@
 @use "src/styles/layout";
 @use "src/styles/typography";
+@use "src/styles/palette";
 
 .container {
   composes: container_md;
@@ -12,4 +13,9 @@
 
 .body {
   composes: body;
+}
+
+.overline {
+  composes: overline;
+  color: map-get(palette.$grey, dark);
 }

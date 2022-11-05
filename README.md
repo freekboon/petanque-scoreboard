@@ -14,7 +14,7 @@ MONGODB_URI="mongodb://localhost:27017/ps-database"
 * Create `games.json`, `players.json`, `teams.json` and `users.json` in `./database/migrate/data`.
 * Start local mongo instance:
 ```
-npm run startMongo
+npm run mongo
 ```
 * Run migration:
 ```bash

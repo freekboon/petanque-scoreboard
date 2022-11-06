@@ -10,6 +10,11 @@ const mapGameData = async (game, rounds) => ({
       players: await Promise.all(
         team.map((playerId) => Player.findById(playerId))
       ),
+      score: rounds
+        .filter((round) =>
+          round.team.every((playerId) => team.includes(playerId))
+        )
+        .reduce((acc, round) => acc + round.points, 0),
     }))
   ),
   maxPoints: game.maxPoints,

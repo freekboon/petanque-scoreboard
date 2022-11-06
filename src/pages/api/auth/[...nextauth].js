@@ -15,17 +15,20 @@ export const authOptions = {
   },
   callbacks: {
     async jwt({ token, account }) {
-      // Persist the OAuth access_token to the token right after signin
       if (account) {
         const user = await User.findOne({ email: token.email });
 
         if (!user) {
-          await User.create({
-            name: token.name,
-            email: token.email,
-            providerId: token.sub,
-          });
+          return false;
         }
+
+        await User.updateOne(
+          { email: token.email },
+          {
+            name: token.name,
+            providerId: token.sub,
+          }
+        );
 
         token.accessToken = account.access_token;
       }
@@ -33,7 +36,6 @@ export const authOptions = {
     },
     // eslint-disable-next-line no-unused-vars
     async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;
       return session;
     },

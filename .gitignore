@@ -40,7 +40,7 @@ yarn-error.log*
 
 # mongodb
 /database/data/*
-/database/migrate/data/*
+/database/reset/data/*
 
 # PWA
 **/public/workbox-*.js

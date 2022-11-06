@@ -18,5 +18,5 @@ npm run mongo
 ```
 * Run migration:
 ```bash
-npm run migrate
+npm run reset
 ```

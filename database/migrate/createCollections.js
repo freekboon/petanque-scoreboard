@@ -45,7 +45,24 @@ const createCollections = async () => {
     },
   });
 
+  const User = await mongoose.model("User", {
+    email: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+    },
+    providerId: {
+      type: String,
+    },
+    playerId: {
+      type: String,
+    },
+  });
+
   await Player.deleteMany({});
+  await User.deleteMany();
   await Game.deleteMany({});
   await Round.deleteMany({});
 };

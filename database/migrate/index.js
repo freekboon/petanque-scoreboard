@@ -7,6 +7,7 @@ const createPlayers = require("./createPlayers");
 const createGames = require("./createGames");
 const createCollections = require("./createCollections");
 const createRounds = require("./createRounds");
+const createUsers = require("./createUsers");
 
 const connectDB = async () => {
   console.log("Connecting database.");
@@ -20,6 +21,7 @@ const connectDB = async () => {
 const run = connectDB()
   .then(createCollections)
   .then(createPlayers)
+  .then(createUsers)
   .then(createGames)
   .then(createRounds)
   .catch((error) => {

@@ -12,12 +12,11 @@ export const getServerSideProps = getGlobalData(async ({ query }) => {
   );
   const result = await response.json();
 
-  const { game, rounds } = result.body;
+  const game = result.body;
 
   return {
     props: {
       game,
-      rounds,
     },
   };
 });

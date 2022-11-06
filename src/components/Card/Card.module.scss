@@ -39,7 +39,7 @@
 
 .chip {
   composes: overline;
-  padding: 0 .75rem;
+  padding: .15rem .75rem;
   background-color: map-get(palette.$primary, main);
   position: absolute;
   top: 0;

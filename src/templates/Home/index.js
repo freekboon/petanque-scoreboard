@@ -14,7 +14,7 @@ const formatDuration = (total) => {
   return `${hours}:${minutes} hours`;
 };
 
-const Home = ({ season, current, rounds }) => {
+const Home = ({ season, game }) => {
   const { data } = useSession();
   return (
     <div className={classes.container}>
@@ -23,24 +23,24 @@ const Home = ({ season, current, rounds }) => {
           <Icon icon="user" size="xl" />
         </button>
       )}
-      {current && (
+      {game && (
         <Card
           className={classes.card}
           chip="live"
           footer={
-            <Button variant="text" href={`/games/${current.id}`} size="small">
+            <Button variant="text" href={`/games/${game.id}`} size="small">
               Check it out <Icon icon="arrowRight" />
             </Button>
           }
         >
-          <Scoreboard game={current} rounds={rounds} />
+          <Scoreboard game={game} rounds={game.rounds} />
         </Card>
       )}
       <Card
         className={classes.card}
         title={`${season.year} season`}
         footer={
-          !current && (
+          !game && (
             <Button variant="text" href="/games/new">
               Start a new game <Icon icon="arrowRight" />
             </Button>
@@ -76,18 +76,18 @@ Home.propTypes = {
     numberOfGamesPlayed: number,
     totalDuration: number,
   }),
-  rounds: arrayOf(
-    shape({
-      id: string,
-      team: arrayOf(string),
-      points: number,
-    })
-  ),
-  current: shape({
+  game: shape({
     id: string.isRequired,
     teams: arrayOf(arrayOf(string)).isRequired,
     maxPoints: number.isRequired,
     start: string.isRequired,
+    rounds: arrayOf(
+      shape({
+        id: string,
+        team: arrayOf(string),
+        points: number,
+      })
+    ),
   }),
 };
 

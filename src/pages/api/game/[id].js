@@ -1,14 +1,13 @@
 import connectDB from "~lib/mongoose";
-import Game from "~models/Game";
-import Round from "~models/Round";
+import GameService from "~services/GameService";
 
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const game = await Game.findById(req.query.id);
-        const rounds = await Round.find({ gameId: game.id });
-        res.status(200).json({ success: true, body: { game, rounds } });
+        const data = await GameService.getById(req.query.id);
+
+        res.status(200).json({ success: true, body: data });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
       }

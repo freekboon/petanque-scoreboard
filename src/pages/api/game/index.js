@@ -1,14 +1,13 @@
 import connectDB from "~lib/mongoose";
 import Game from "~models/Game";
+import GameService from "~services/GameService";
 
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const games = await Game.find({ end: { $exists: true } })
-          .sort({ start: -1 })
-          .limit(req.query.limit || 20)
-          .skip(req.query.skip || 0);
+        const games = await GameService.getFinished(req.query);
+
         res.status(200).json({ success: true, body: games });
       } catch (error) {
         res.status(400).json({ success: false, body: error });

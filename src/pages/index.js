@@ -10,10 +10,7 @@ const getCurrentGame = async () => {
   );
   const result = await response.json();
 
-  return {
-    current: result.body?.current || null,
-    rounds: result.body?.rounds || [],
-  };
+  return result.body || null;
 };
 
 const getCurrentSeason = async (year) => {
@@ -26,7 +23,7 @@ const getCurrentSeason = async (year) => {
 };
 
 export const getServerSideProps = getGlobalData(async () => {
-  const { current, rounds } = await getCurrentGame();
+  const game = await getCurrentGame();
 
   const year = new Date().getFullYear();
   const season = await getCurrentSeason(year);
@@ -37,8 +34,7 @@ export const getServerSideProps = getGlobalData(async () => {
         ...season,
         year,
       },
-      current,
-      rounds,
+      game,
     },
   };
 });

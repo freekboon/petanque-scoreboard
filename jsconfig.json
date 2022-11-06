@@ -13,7 +13,8 @@
       "~contexts/*": ["src/contexts/*"],
       "~constants/*": ["src/constants/*"],
       "~models/*": ["src/models/*"],
-      "~lib/*": ["src/lib/*"]
+      "~lib/*": ["src/lib/*"],
+      "~services/*": ["src/services/*"]
     }
   }
 }

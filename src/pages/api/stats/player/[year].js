@@ -16,9 +16,8 @@ const handler = async (req, res) => {
         const players = await Player.find({}, { __v: 0, legacyId: 0 });
 
         const getPlayerStats = async (player) => {
-          const playerGames = await games.filter(
-            ({ teams }) =>
-              teams[0].includes(player.id) || teams[1].includes(player.id)
+          const playerGames = await games.filter(({ teams }) =>
+            teams.some((team) => team.includes(player.id))
           );
 
           const win = await playerGames.filter(({ winner }) =>

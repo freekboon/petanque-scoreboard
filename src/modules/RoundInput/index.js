@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Radio from "~components/Radio";
 import classes from "./RoundInput.module.scss";
-import { arrayOf, string } from "prop-types";
+import { arrayOf, object, string } from "prop-types";
 import Button from "~components/Button";
-import PlayerContext from "~contexts/PlayerContext";
 import { useRouter } from "next/router";
+import displayTeamNames from "~utils/displayTeamNames";
 
 const RoundInput = ({ teams, gameId }) => {
-  const { getTeamName } = useContext(PlayerContext);
   const [points, setPoints] = useState(0);
   const [team, setTeam] = useState("");
   const router = useRouter();
@@ -17,8 +16,9 @@ const RoundInput = ({ teams, gameId }) => {
     setTeam("");
   };
 
-  const addRound = () =>
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
+  const addRound = () => {
+    console.log(team);
+    return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
       method: "POST",
       body: JSON.stringify({
         gameId,
@@ -26,6 +26,7 @@ const RoundInput = ({ teams, gameId }) => {
         points,
       }),
     });
+  };
 
   const handleAddRound = () =>
     addRound().then(() => {
@@ -48,13 +49,13 @@ const RoundInput = ({ teams, gameId }) => {
         ))}
       </div>
       <div className={classes.flex}>
-        {teams.map((playerIds) => (
+        {teams.map(({ id, players }) => (
           <Radio
-            key={playerIds}
-            value={playerIds}
-            onChange={() => setTeam(playerIds)}
-            checked={team === playerIds}
-            label={getTeamName(playerIds)}
+            key={id}
+            value={id}
+            onChange={() => setTeam(id)}
+            checked={team === id}
+            label={displayTeamNames(players)}
           />
         ))}
       </div>
@@ -72,7 +73,7 @@ const RoundInput = ({ teams, gameId }) => {
 
 RoundInput.propTypes = {
   gameId: string.isRequired,
-  teams: arrayOf(arrayOf(string)).isRequired,
+  teams: arrayOf(arrayOf(object)).isRequired,
 };
 
 export default RoundInput;

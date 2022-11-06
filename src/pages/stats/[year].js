@@ -1,10 +1,9 @@
 import withLayout from "~utils/withLayout";
-import getGlobalData from "~lib/getGlobalData";
 import StatsTemplate from "~templates/Stats";
 
 const Stats = StatsTemplate;
 
-export const getServerSideProps = getGlobalData(async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const { year } = params;
 
   const response = await fetch(
@@ -18,6 +17,6 @@ export const getServerSideProps = getGlobalData(async ({ params }) => {
       stats: result.body,
     },
   };
-});
+};
 
 export default withLayout(Stats);

@@ -1,10 +1,9 @@
 import withLayout from "~utils/withLayout";
-import getGlobalData from "~lib/getGlobalData";
 import GameTemplate from "~templates/Game";
 
 const Game = GameTemplate;
 
-export const getServerSideProps = getGlobalData(async ({ query }) => {
+export const getServerSideProps = async ({ query }) => {
   const { id } = query;
 
   const response = await fetch(
@@ -19,6 +18,6 @@ export const getServerSideProps = getGlobalData(async ({ query }) => {
       game,
     },
   };
-});
+};
 
 export default withLayout(Game);

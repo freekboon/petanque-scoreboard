@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import classes from "./NewGame.module.scss";
 import Checkbox from "~components/Checkbox";
 import Radio from "~components/Radio";
 import Button from "~components/Button";
-import playerContext from "~contexts/PlayerContext";
 import Card from "~components/Card";
 import { useRouter } from "next/router";
+import { arrayOf, shape } from "prop-types";
 
 const initialState = { home: [], guest: [] };
 
-const NewGame = () => {
+const NewGame = ({ players }) => {
   const [teams, setTeams] = useState(initialState);
   const [maxPoints, setMaxPoints] = useState(9);
-  const { players } = useContext(playerContext);
   const router = useRouter();
 
   const handleChangeTeams = (team) => (event) => {
@@ -141,6 +140,8 @@ const NewGame = () => {
   );
 };
 
-NewGame.propTypes = {};
+NewGame.propTypes = {
+  players: arrayOf(shape({})),
+};
 
 export default NewGame;

@@ -33,6 +33,7 @@ const handler = async (req, res) => {
         if (gameIsFinished) {
           await Game.findByIdAndUpdate(game.id, {
             end: new Date().toISOString(),
+            winner: JSON.parse(req.body).team,
           });
         }
 

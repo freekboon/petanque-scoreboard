@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import classes from "./Scoreboard.module.scss";
-import { arrayOf, shape } from "prop-types";
-import PlayerContext from "~contexts/PlayerContext";
+import { shape } from "prop-types";
 import { formatDistance } from "date-fns";
+import displayTeamNames from "~utils/displayTeamNames";
 
-const Scoreboard = ({ game, rounds }) => {
-  const { getTeamName } = useContext(PlayerContext);
-
+const Scoreboard = ({ game }) => {
   const getTeamScore = (team) =>
-    rounds
+    game.rounds
       .filter((round) =>
         round.team.every((playerId) => team.includes(playerId))
       )
@@ -19,13 +17,13 @@ const Scoreboard = ({ game, rounds }) => {
     <>
       <div className={classes.scoreboard}>
         <div className={classes.scoreboard_team}>
-          {getTeamName(game.teams[0])}
+          {displayTeamNames(game.teams[0].players)}
         </div>
         <div className={classes.scoreboard_score}>
-          {getTeamScore(game.teams[0])} : {getTeamScore(game.teams[1])}
+          {getTeamScore(game.teams[0].id)} : {getTeamScore(game.teams[1].id)}
         </div>
         <div className={classes.scoreboard_team} style={{ textAlign: "right" }}>
-          {getTeamName(game.teams[1])}
+          {displayTeamNames(game.teams[1].players)}
         </div>
       </div>
       <div className={classes.details}>
@@ -36,14 +34,13 @@ const Scoreboard = ({ game, rounds }) => {
             game.end ? new Date(game.end) : new Date()
           )}
         </div>
-        <div className={classes.caption}>{rounds.length} rounds</div>
+        <div className={classes.caption}>{game.rounds.length} rounds</div>
       </div>
     </>
   );
 };
 
 Scoreboard.propTypes = {
-  rounds: arrayOf(shape({})),
   game: shape({}),
 };
 

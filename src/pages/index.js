@@ -1,6 +1,5 @@
 import withLayout from "~utils/withLayout";
 import HomeTemplate from "~templates/Home";
-import getGlobalData from "~lib/getGlobalData";
 
 const Home = HomeTemplate;
 
@@ -22,7 +21,7 @@ const getCurrentSeason = async (year) => {
   return result.body || null;
 };
 
-export const getServerSideProps = getGlobalData(async () => {
+export const getServerSideProps = async () => {
   const game = await getCurrentGame();
 
   const year = new Date().getFullYear();
@@ -37,6 +36,6 @@ export const getServerSideProps = getGlobalData(async () => {
       game,
     },
   };
-});
+};
 
 export default withLayout(Home);

@@ -1,9 +1,17 @@
 import Game from "~models/Game";
 import Round from "~models/Round";
+import Player from "~models/Player";
 
-const mapGameData = (game, rounds) => ({
+const mapGameData = async (game, rounds) => ({
   id: game._id,
-  teams: game.teams,
+  teams: await Promise.all(
+    game.teams.map(async (team) => ({
+      id: team,
+      players: await Promise.all(
+        team.map((playerId) => Player.findById(playerId))
+      ),
+    }))
+  ),
   maxPoints: game.maxPoints,
   start: game.start,
   end: game.end,
@@ -15,14 +23,14 @@ const getById = async (gameId) => {
   const game = await Game.findById(gameId);
   const rounds = await Round.find({ gameId });
 
-  return mapGameData(game, rounds);
+  return await mapGameData(game, rounds);
 };
 
 const getCurrent = async () => {
   const game = await Game.findOne({ end: { $exists: false } });
   const rounds = await Round.find({ gameId: game.id });
 
-  return mapGameData(game, rounds);
+  return await mapGameData(game, rounds);
 };
 
 const getFinished = async (skip, limit) => {

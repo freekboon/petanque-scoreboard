@@ -1,9 +1,19 @@
 import withLayout from "~utils/withLayout";
 import NewGameTemplate from "~templates/NewGame";
-import getGlobalData from "~lib/getGlobalData";
 
 const NewGame = NewGameTemplate;
 
-export const getServerSideProps = getGlobalData();
+export const getServerSideProps = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/player`
+  );
+  const result = await response.json();
+
+  return {
+    props: {
+      players: result.body,
+    },
+  };
+};
 
 export default withLayout(NewGame);

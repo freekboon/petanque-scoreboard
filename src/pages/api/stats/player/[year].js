@@ -8,17 +8,14 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const games = await Game.find({
-          start: { $gt: new Date(year).toISOString() },
-          end: { $lt: new Date(`${parseInt(year) + 1}`).toISOString() },
-        }).lean();
-
         const players = await Player.find({}, { __v: 0, legacyId: 0 });
 
         const getPlayerStats = async (player) => {
-          const playerGames = await games.filter(({ teams }) =>
-            teams.some((team) => team.includes(player.id))
-          );
+          const playerGames = await Game.find({
+            start: { $gt: new Date(year).toISOString() },
+            end: { $lt: new Date(`${parseInt(year) + 1}`).toISOString() },
+            $or: [{ homeTeam: player.id }, { guestTeam: player.id }],
+          }).lean();
 
           const win = await playerGames.filter(({ winner }) =>
             winner.includes(player.id)

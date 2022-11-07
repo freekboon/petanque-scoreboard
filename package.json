@@ -13,7 +13,8 @@
     "storybook": "start-storybook -p 6006 --no-open -s ./public",
     "build-storybook": "build-storybook -s ./public",
     "mongo": "mongod --dbpath=./database/data",
-    "reset": "node ./database/reset"
+    "reset": "node ./database/reset",
+    "migrate": "node ./database/migrate"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

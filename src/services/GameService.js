@@ -2,21 +2,22 @@ import Game from "~models/Game";
 import Round from "~models/Round";
 import Player from "~models/Player";
 
+const setTeam = async (team, game, rounds) => ({
+  id: game[team],
+  players: await Promise.all(
+    game[team].map((playerId) => Player.findById(playerId))
+  ),
+  score: rounds
+    .filter((round) =>
+      round.team.every((playerId) => game[team].includes(playerId))
+    )
+    .reduce((acc, round) => acc + round.points, 0),
+});
+
 const mapGameData = async (game, rounds) => ({
   id: game._id,
-  teams: await Promise.all(
-    game.teams.map(async (team) => ({
-      id: team,
-      players: await Promise.all(
-        team.map((playerId) => Player.findById(playerId))
-      ),
-      score: rounds
-        .filter((round) =>
-          round.team.every((playerId) => team.includes(playerId))
-        )
-        .reduce((acc, round) => acc + round.points, 0),
-    }))
-  ),
+  homeTeam: await setTeam("homeTeam", game, rounds),
+  guestTeam: await setTeam("guestTeam", game, rounds),
   maxPoints: game.maxPoints,
   start: game.start,
   end: game.end,

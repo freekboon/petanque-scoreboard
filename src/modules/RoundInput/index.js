@@ -17,7 +17,6 @@ const RoundInput = ({ teams, gameId }) => {
   };
 
   const addRound = () => {
-    console.log(team);
     return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
       method: "POST",
       body: JSON.stringify({

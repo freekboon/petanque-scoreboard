@@ -16,7 +16,8 @@ const handler = async (req, res) => {
     case "POST":
       try {
         const game = await Game.create({
-          teams: JSON.parse(req.body).teams,
+          homeTeam: JSON.parse(req.body).homeTeam,
+          guestTeam: JSON.parse(req.body).guestTeam,
           maxPoints: JSON.parse(req.body).maxPoints,
           start: new Date().toISOString(),
         });

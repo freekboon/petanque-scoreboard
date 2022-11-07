@@ -8,13 +8,13 @@ const Scoreboard = ({ game }) => (
   <>
     <div className={classes.scoreboard}>
       <div className={classes.scoreboard_team}>
-        {displayTeamNames(game.teams[0].players)}
+        {displayTeamNames(game.homeTeam.players)}
       </div>
       <div className={classes.scoreboard_score}>
-        {game.teams[0].score} : {game.teams[1].score}
+        {game.homeTeam.score} : {game.guestTeam.score}
       </div>
       <div className={classes.scoreboard_team} style={{ textAlign: "right" }}>
-        {displayTeamNames(game.teams[1].players)}
+        {displayTeamNames(game.guestTeam.players)}
       </div>
     </div>
     <div className={classes.details}>

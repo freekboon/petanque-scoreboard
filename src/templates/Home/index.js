@@ -5,7 +5,6 @@ import Card from "~components/Card";
 import Scoreboard from "~components/Scoreboard";
 import Button from "~components/Button";
 import Icon from "~components/Icon";
-import { signIn, useSession } from "next-auth/react";
 
 const formatDuration = (total) => {
   const minutes = total % 60;
@@ -15,14 +14,8 @@ const formatDuration = (total) => {
 };
 
 const Home = ({ season, game }) => {
-  const { data } = useSession();
   return (
     <div className={classes.container}>
-      {!data && (
-        <button onClick={() => signIn()}>
-          <Icon icon="user" size="xl" />
-        </button>
-      )}
       {game && (
         <Card
           className={classes.card}
@@ -33,7 +26,7 @@ const Home = ({ season, game }) => {
             </Button>
           }
         >
-          <Scoreboard game={game} rounds={game.rounds} />
+          <Scoreboard game={game} />
         </Card>
       )}
       <Card

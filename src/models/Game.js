@@ -2,8 +2,12 @@ import { Schema, models, model } from "mongoose";
 
 const gameSchema = new Schema(
   {
-    teams: {
-      type: [[String]],
+    homeTeam: {
+      type: [String],
+      required: true,
+    },
+    guestTeam: {
+      type: [String],
       required: true,
     },
     maxPoints: {
@@ -18,7 +22,7 @@ const gameSchema = new Schema(
       type: String,
     },
     winner: {
-      rtpe: [String],
+      type: [String],
     },
   },
   {

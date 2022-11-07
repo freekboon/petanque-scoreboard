@@ -4,36 +4,40 @@ import { arrayOf, number, shape, string } from "prop-types";
 import Card from "~components/Card";
 import RoundInput from "~modules/RoundInput";
 import Scoreboard from "~components/Scoreboard";
-import displayTeamNames from "~utils/displayTeamNames";
 
-const Game = ({ game }) => (
-  <div className={classes.container}>
-    <Card className={classes.card}>
-      <Scoreboard game={game} />
-    </Card>
-    {!game.end && (
+const Game = ({ game }) => {
+  const getTeamName = (teamId) =>
+    [game.homeTeam, game.guestTeam]
+      .find((team) => team.id.every((playerId) => teamId.includes(playerId)))
+      .players.map((player) => player.name)
+      .join(" & ");
+
+  return (
+    <div className={classes.container}>
       <Card className={classes.card}>
-        <RoundInput teams={game.teams} gameId={game.id} />
+        <Scoreboard game={game} />
       </Card>
-    )}
-    {game.rounds.length > 0 && (
-      <Card className={classes.card}>
-        {game.rounds.map((round) => (
-          <div key={round.id} className={classes.round}>
-            <div>
-              {displayTeamNames(
-                game.teams.find((team) =>
-                  team.id.every((playerId) => round.team.includes(playerId))
-                ).players
-              )}
+      {!game.end && (
+        <Card className={classes.card}>
+          <RoundInput
+            teams={[game.homeTeam, game.guestTeam]}
+            gameId={game.id}
+          />
+        </Card>
+      )}
+      {game.rounds.length > 0 && (
+        <Card className={classes.card}>
+          {game.rounds.map((round) => (
+            <div key={round.id} className={classes.round}>
+              <div>{getTeamName(round.team)}</div>
+              <div>{round.points}</div>
             </div>
-            <div>{round.points}</div>
-          </div>
-        ))}
-      </Card>
-    )}
-  </div>
-);
+          ))}
+        </Card>
+      )}
+    </div>
+  );
+};
 
 Game.propTypes = {
   game: shape({

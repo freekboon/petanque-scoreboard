@@ -7,7 +7,7 @@ import Card from "~components/Card";
 import { useRouter } from "next/router";
 import { arrayOf, shape } from "prop-types";
 
-const initialState = { home: [], guest: [] };
+const initialState = { homeTeam: [], guestTeam: [] };
 
 const NewGame = ({ players }) => {
   const [teams, setTeams] = useState(initialState);
@@ -19,7 +19,7 @@ const NewGame = ({ players }) => {
 
     setTeams((prevState) => ({
       ...prevState,
-      [team]: teams[team].includes(playerId)
+      [team]: [team].includes(playerId)
         ? prevState[team].filter((player) => player !== playerId)
         : prevState[team].concat([playerId]),
     }));
@@ -34,7 +34,8 @@ const NewGame = ({ players }) => {
       const response = await fetch("/api/game", {
         method: "POST",
         body: JSON.stringify({
-          teams: [teams.home, teams.guest],
+          homeTeam: teams.homeTeam,
+          guestTeam: teams.guestTeam,
           maxPoints,
         }),
       });
@@ -55,19 +56,20 @@ const NewGame = ({ players }) => {
   const playerIsUnavailable = (playerId, team) => {
     if (team === "home") {
       return (
-        teams.guest.includes(playerId) ||
-        (!teams.home.includes(playerId) && teams.home.length === 2)
+        teams.guestTeam.includes(playerId) ||
+        (!teams.homeTeam.includes(playerId) && teams.homeTeam.length === 2)
       );
     }
     if (team === "guest") {
       return (
         teams.home.includes(playerId) ||
-        (!teams.guest.includes(playerId) && teams.guest.length === 2)
+        (!teams.guestTeam.includes(playerId) && teams.guestTeam.length === 2)
       );
     }
   };
 
-  const gameIsValid = teams.home.length === 2 && teams.guest.length === 2;
+  const gameIsValid =
+    teams.homeTeam.length === 2 && teams.guestTeam.length === 2;
 
   return (
     <div className={classes.container}>
@@ -83,11 +85,11 @@ const NewGame = ({ players }) => {
                   .map((player) => (
                     <Checkbox
                       key={`home-${player.id}`}
-                      onChange={handleChangeTeams("home")}
-                      checked={teams.home.includes(player.id)}
+                      onChange={handleChangeTeams("homeTeam")}
+                      checked={teams.homeTeam.includes(player.id)}
                       label={player.name}
                       value={player.id}
-                      disabled={playerIsUnavailable(player.id, "home")}
+                      disabled={playerIsUnavailable(player.id, "homeTeam")}
                     />
                   ))}
               </div>
@@ -100,11 +102,11 @@ const NewGame = ({ players }) => {
                   .map((player) => (
                     <Checkbox
                       key={`guest-${player.id}`}
-                      onChange={handleChangeTeams("guest")}
-                      checked={teams.guest.includes(player.id)}
+                      onChange={handleChangeTeams("guestTeam")}
+                      checked={teams.guestTeam.includes(player.id)}
                       label={player.name}
                       value={player.id}
-                      disabled={playerIsUnavailable(player.id, "guest")}
+                      disabled={playerIsUnavailable(player.id, "guestTeam")}
                       color="secondary"
                     />
                   ))}

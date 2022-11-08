@@ -5,13 +5,7 @@ import Card from "~components/Card";
 import Scoreboard from "~components/Scoreboard";
 import Button from "~components/Button";
 import Icon from "~components/Icon";
-
-const formatDuration = (total) => {
-  const minutes = total % 60;
-  const hours = (total - minutes) / 60;
-
-  return `${hours}:${minutes} hours`;
-};
+import formatDuration from "~utils/formatDuration";
 
 const Home = ({ season, game }) => {
   return (

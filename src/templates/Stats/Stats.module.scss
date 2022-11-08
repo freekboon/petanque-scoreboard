@@ -8,8 +8,12 @@
 
 .flex {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+
+  &__spaced {
+    @extend .flex;
+    margin-bottom: 2rem;
+  }
 }
 
 .card {

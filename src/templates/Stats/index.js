@@ -5,8 +5,9 @@ import Card from "~components/Card";
 import { arrayOf, object, string } from "prop-types";
 import Radio from "~components/Radio";
 import { useRouter } from "next/router";
+import formatDuration from "~utils/formatDuration";
 
-const Stats = ({ year, players, teams }) => {
+const Stats = ({ year, players, teams, season }) => {
   const router = useRouter();
   const handleChange = (event) => {
     router.push(`/stats/${event.target.value}`);
@@ -14,7 +15,7 @@ const Stats = ({ year, players, teams }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.flex}>
+      <div className={classes.flex__spaced}>
         {["2020", "2021", "2022", "2023"].map((_year) => (
           <Radio
             key={_year}
@@ -25,8 +26,13 @@ const Stats = ({ year, players, teams }) => {
           />
         ))}
       </div>
-      <Card title="season" className={classes.card}>
-        <p className={classes.body}>Coming soon-ish</p>
+      <Card title={`${year} season`} className={classes.card}>
+        <div className={classes.flex}>
+          <div className={classes.body}>{season.numberOfGamesPlayed} games</div>
+          <div className={classes.body}>
+            {formatDuration(season.totalDuration)} playtime
+          </div>
+        </div>
       </Card>
       <Card title="players" className={classes.card}>
         <Table
@@ -52,6 +58,7 @@ const Stats = ({ year, players, teams }) => {
 
 Stats.propTypes = {
   year: string,
+  season: arrayOf(object),
   players: arrayOf(object),
   teams: arrayOf(object),
 };

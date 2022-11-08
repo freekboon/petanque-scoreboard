@@ -6,7 +6,7 @@ import { arrayOf, object, string } from "prop-types";
 import Radio from "~components/Radio";
 import { useRouter } from "next/router";
 
-const Stats = ({ year, stats }) => {
+const Stats = ({ year, players, teams }) => {
   const router = useRouter();
   const handleChange = (event) => {
     router.push(`/stats/${event.target.value}`);
@@ -31,14 +31,20 @@ const Stats = ({ year, stats }) => {
       <Card title="players" className={classes.card}>
         <Table
           columns={["name", "played", "win", "loss", "ratio"]}
-          rows={stats}
+          rows={players}
           rowKey="name"
           defaultSort="ratio"
           showNumbers
         />
       </Card>
       <Card title="teams" className={classes.card}>
-        <p className={classes.body}>Coming soon-ish</p>
+        <Table
+          columns={["name", "played", "win", "loss", "ratio"]}
+          rows={teams}
+          rowKey="name"
+          defaultSort="ratio"
+          showNumbers
+        />
       </Card>
     </div>
   );
@@ -46,7 +52,8 @@ const Stats = ({ year, stats }) => {
 
 Stats.propTypes = {
   year: string,
-  stats: arrayOf(object),
+  players: arrayOf(object),
+  teams: arrayOf(object),
 };
 
 export default Stats;

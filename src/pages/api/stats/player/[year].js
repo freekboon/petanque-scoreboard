@@ -14,8 +14,11 @@ const handler = async (req, res) => {
           const playerGames = await Game.find({
             start: { $gt: new Date(year).toISOString() },
             end: { $lt: new Date(`${parseInt(year) + 1}`).toISOString() },
+            winner: { $exists: true },
             $or: [{ homeTeam: player.id }, { guestTeam: player.id }],
           }).lean();
+
+          const total = playerGames.length;
 
           const win = await playerGames.filter(({ winner }) =>
             winner.includes(player.id)
@@ -25,10 +28,10 @@ const handler = async (req, res) => {
 
           return {
             name: player.name,
-            played: playerGames.length,
+            played: total,
             win,
             loss,
-            ratio: parseFloat((win / loss).toFixed(1)),
+            ratio: parseFloat((win / total).toFixed(2)),
           };
         };
 

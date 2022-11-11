@@ -49,7 +49,11 @@ const Table = ({ columns, rows, rowKey, defaultSort, showNumbers }) => {
                 (ascending ? b : a)[sortBy]
               );
             }
-            return (ascending ? b : a)[sortBy] - (ascending ? a : b)[sortBy];
+            return (
+              // Todo: make second sort variable.
+              (ascending ? b : a)[sortBy] - (ascending ? a : b)[sortBy] ||
+              b.played - a.played
+            );
           })
           .map((row) => (
             <div key={`row-${row[rowKey]}`} className={classes.table_row}>

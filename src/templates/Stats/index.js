@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Stats.module.scss";
 import Table from "~components/Table";
 import Card from "~components/Card";
-import { arrayOf, object, string } from "prop-types";
+import { arrayOf, object, shape, string } from "prop-types";
 import Radio from "~components/Radio";
 import { useRouter } from "next/router";
 import formatDuration from "~utils/formatDuration";
@@ -58,7 +58,7 @@ const Stats = ({ year, players, teams, season }) => {
 
 Stats.propTypes = {
   year: string,
-  season: arrayOf(object),
+  season: shape({}),
   players: arrayOf(object),
   teams: arrayOf(object),
 };

@@ -4,14 +4,9 @@ import { arrayOf, number, shape, string } from "prop-types";
 import Card from "~components/Card";
 import RoundInput from "~modules/RoundInput";
 import Scoreboard from "~components/Scoreboard";
+import Round from "./components/Round";
 
 const Game = ({ game }) => {
-  const getTeamName = (teamId) =>
-    [game.homeTeam, game.guestTeam]
-      .find((team) => team.id.every((playerId) => teamId.includes(playerId)))
-      .players.map((player) => player.name)
-      .join(" & ");
-
   return (
     <div className={classes.container}>
       <Card className={classes.card}>
@@ -27,11 +22,14 @@ const Game = ({ game }) => {
       )}
       {game.rounds.length > 0 && (
         <Card className={classes.card}>
-          {game.rounds.map((round) => (
-            <div key={round.id} className={classes.round}>
-              <div>{getTeamName(round.team)}</div>
-              <div>{round.points}</div>
-            </div>
+          {game.rounds.map((round, index) => (
+            <Round
+              key={round.id}
+              round={round}
+              teams={[game.homeTeam, game.guestTeam]}
+              editAvailable={index === game.rounds.length - 1 && !game.end}
+              gameId={game.id}
+            />
           ))}
         </Card>
       )}

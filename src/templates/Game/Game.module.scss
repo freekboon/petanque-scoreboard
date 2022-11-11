@@ -6,17 +6,6 @@
   padding-top: 1rem;
 }
 
-.round {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &:not(:last-of-type) {
-    margin-bottom: .5rem
-  }
-
-}
-
 .scoreboard {
   display: flex;
   justify-content: space-between;

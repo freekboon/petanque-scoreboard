@@ -1,0 +1,11 @@
+.round {
+  &:not(:last-of-type) {
+    margin-bottom: .5rem
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

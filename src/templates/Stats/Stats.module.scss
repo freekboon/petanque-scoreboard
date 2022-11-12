@@ -1,5 +1,6 @@
 @use "src/styles/layout";
 @use "src/styles/typography";
+@use "src/styles/palette";
 
 .container {
   composes: container_md;
@@ -12,7 +13,8 @@
 
   &__spaced {
     @extend .flex;
-    margin-bottom: 2rem;
+
+    margin-bottom: 1rem;
   }
 }
 
@@ -20,6 +22,7 @@
   margin-bottom: 1rem;
 }
 
-.body {
-  composes: body;
+.caption {
+  composes: caption;
+  color: map-get(palette.$grey, dark)
 }

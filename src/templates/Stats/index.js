@@ -2,12 +2,12 @@ import React from "react";
 import classes from "./Stats.module.scss";
 import Table from "~components/Table";
 import Card from "~components/Card";
-import { arrayOf, object, shape, string } from "prop-types";
+import { arrayOf, number, object, shape, string } from "prop-types";
 import Radio from "~components/Radio";
 import { useRouter } from "next/router";
 import formatDuration from "~utils/formatDuration";
 
-const Stats = ({ year, players, teams, season }) => {
+const Stats = ({ year, players, teams, season, seasons }) => {
   const router = useRouter();
   const handleChange = (event) => {
     router.push(`/stats/${event.target.value}`);
@@ -15,21 +15,23 @@ const Stats = ({ year, players, teams, season }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.flex__spaced}>
-        {["2020", "2021", "2022", "2023"].map((_year) => (
-          <Radio
-            key={_year}
-            onChange={handleChange}
-            checked={year === _year}
-            value={_year}
-            label={_year}
-          />
-        ))}
-      </div>
-      <Card title={`${year} season`} className={classes.card}>
+      <Card title="Seasons" className={classes.card}>
+        <div className={classes.flex__spaced}>
+          {seasons.map((_year) => (
+            <Radio
+              key={_year}
+              onChange={handleChange}
+              checked={year === _year.toString()}
+              value={_year}
+              label={_year.toString()}
+            />
+          ))}
+        </div>
         <div className={classes.flex}>
-          <div className={classes.body}>{season.numberOfGamesPlayed} games</div>
-          <div className={classes.body}>
+          <div className={classes.caption}>
+            {season.numberOfGamesPlayed} games
+          </div>
+          <div className={classes.caption}>
             {formatDuration(season.totalDuration)} playtime
           </div>
         </div>
@@ -61,6 +63,7 @@ Stats.propTypes = {
   season: shape({}),
   players: arrayOf(object),
   teams: arrayOf(object),
+  seasons: arrayOf(number),
 };
 
 export default Stats;

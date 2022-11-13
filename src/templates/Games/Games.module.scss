@@ -9,3 +9,30 @@
 .body {
   composes: body;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  margin-bottom: 1rem;
+}
+
+.game {
+  padding: .5rem 0;
+  display: flex;
+
+  > div {
+    white-space: nowrap;
+
+    &:first-of-type {
+      width: 100%;
+    }
+
+    &:last-of-type {
+      width: 100%;
+      text-align: right;
+    }
+  }
+}

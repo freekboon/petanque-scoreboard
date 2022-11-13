@@ -23,6 +23,20 @@ const mapGameData = async (game, rounds) => ({
   end: game.end,
   winner: game.winner,
   rounds: rounds,
+  score: {
+    homeTeam:
+      rounds
+        .filter(({ team }) =>
+          team.every((playerId) => game.homeTeam.includes(playerId))
+        )
+        .reduce((acc, round) => acc + round.points, 0) || 0,
+    guestTeam:
+      rounds
+        .filter(({ team }) =>
+          team.every((playerId) => game.guestTeam.includes(playerId))
+        )
+        .reduce((acc, round) => acc + round.points, 0) || 0,
+  },
 });
 
 const getById = async (gameId) => {

@@ -6,8 +6,7 @@ const Bellow = ({ children, className, open }) => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    const bellowEl = contentRef.current;
-    setHeight(bellowEl.getBoundingClientRect().height);
+    setHeight(contentRef.current.getBoundingClientRect().height);
   }, []);
 
   return (

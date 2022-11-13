@@ -19,7 +19,7 @@ const NewGame = ({ players }) => {
 
     setTeams((prevState) => ({
       ...prevState,
-      [team]: [team].includes(playerId)
+      [team]: teams[team].includes(playerId)
         ? prevState[team].filter((player) => player !== playerId)
         : prevState[team].concat([playerId]),
     }));
@@ -54,15 +54,15 @@ const NewGame = ({ players }) => {
   };
 
   const playerIsUnavailable = (playerId, team) => {
-    if (team === "home") {
+    if (team === "homeTeam") {
       return (
         teams.guestTeam.includes(playerId) ||
         (!teams.homeTeam.includes(playerId) && teams.homeTeam.length === 2)
       );
     }
-    if (team === "guest") {
+    if (team === "guestTeam") {
       return (
-        teams.home.includes(playerId) ||
+        teams.homeTeam.includes(playerId) ||
         (!teams.guestTeam.includes(playerId) && teams.guestTeam.length === 2)
       );
     }

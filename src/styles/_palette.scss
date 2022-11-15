@@ -8,3 +8,8 @@ $brand: (primary: $primary, secondary: $secondary, tertary: $tertary, white: $wh
 $grey: (medium: #9e9e9e, dark: #666666, light: #e0e0e0);
 
 $background: #F3F6F9;
+
+@function brand($key, $variant: main) {
+  $palette: map-get($brand, $key);
+  @return map-get($palette, $variant);
+}

@@ -1,17 +1,23 @@
-import withLayout from "~utils/withLayout";
 import GamesTemplate from "~templates/Games";
+import withLayout from "~utils/withLayout";
 
-const Games = GamesTemplate;
+const NewGames = GamesTemplate;
 
-export const getServerSideProps = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/game`);
+export const getServerSideProps = async ({ query }) => {
+  const { page = 1 } = query;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/game?page=${page}`
+  );
   const result = await response.json();
 
   return {
     props: {
-      games: result.body,
+      page,
+      count: result.body.count,
+      games: result.body.games,
     },
   };
 };
 
-export default withLayout(Games);
+export default withLayout(NewGames);

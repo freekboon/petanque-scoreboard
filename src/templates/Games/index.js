@@ -1,69 +1,49 @@
 import React from "react";
 import classes from "./Games.module.scss";
-import { arrayOf, number, shape, string } from "prop-types";
+import { array, number, string } from "prop-types";
 import Card from "~components/Card";
-import Radio from "~components/Radio";
-import { useRouter } from "next/router";
-import { format } from "date-fns";
-import Accordion from "~components/Accordion";
+import Button from "~components/Button";
 import displayTeamNames from "~utils/displayTeamNames";
 
-const Games = ({ year, seasons, games }) => {
-  const router = useRouter();
-
-  const handleChange = (event) => {
-    router.push(`/games/history/${event.target.value}`);
-  };
-
-  const months = [
-    ...new Set(games.map(({ start }) => format(new Date(start), "MMMM"))),
-  ];
-
-  const accordionItems = months.map((month) => {
-    const _games = games.filter(
-      ({ start }) => format(new Date(start), "MMMM") === month
-    );
-    return {
-      itemKey: `${year}-${month}`,
-      title: `${month} (${_games.length})`,
-      body: _games.map((game) => (
-        <div key={game.id} className={classes.game}>
-          <div>{displayTeamNames(game.homeTeam.players)}</div>
-          <div>
-            {game.score.homeTeam} - {game.score.guestTeam}
-          </div>
-          <div>{displayTeamNames(game.guestTeam.players)}</div>
-        </div>
-      )),
-    };
-  });
+const Games = ({ page, count, games }) => {
+  const totalPages = Math.floor(count / 16);
 
   return (
     <div className={classes.container}>
-      <Card title="Seasons" className={classes.card}>
-        <div className={classes.flex}>
-          {seasons.map((_year) => (
-            <Radio
-              key={_year}
-              onChange={handleChange}
-              checked={year === _year.toString()}
-              value={_year}
-              label={_year.toString()}
-            />
-          ))}
+      <Card title="Games history">
+        {games.map((game) => (
+          <div key={game.id} className={classes.game}>
+            <div>{displayTeamNames(game.homeTeam.players)}</div>
+            <div>
+              {game.score.homeTeam} - {game.score.guestTeam}
+            </div>
+            <div>{displayTeamNames(game.guestTeam.players)}</div>
+          </div>
+        ))}
+      </Card>
+      <div className={classes.buttons}>
+        {page > 1 && (
+          <Button variant="text" href={`/games?page=${parseInt(page) - 1}`}>
+            prev
+          </Button>
+        )}
+        <div className={classes.body}>
+          {page} / {totalPages}
         </div>
-      </Card>
-      <Card title={`${year} games`} noPadding>
-        <Accordion items={accordionItems} />
-      </Card>
+        {page < totalPages && (
+          <Button variant="text" href={`/games?page=${parseInt(page) + 1}`}>
+            next
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
 
 Games.propTypes = {
-  year: string,
-  seasons: arrayOf(number),
-  games: arrayOf(shape({})),
+  page: string,
+  count: number,
+  games: array,
 };
 
 export default Games;

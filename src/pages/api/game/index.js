@@ -6,9 +6,20 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const games = await GameService.getFinished(req.query);
+        const count = await Game.count({});
 
-        res.status(200).json({ success: true, body: games });
+        const games = await Game.find(
+          { end: { $exists: true } },
+          {},
+          { skip: req.query.page * 16, limit: 16, sort: { start: -1 } }
+        );
+
+        const gamesWithData = await Promise.all(
+          games.map(async (game) => await GameService.getById(game.id))
+        );
+        res
+          .status(200)
+          .json({ success: true, body: { count, games: gamesWithData } });
       } catch (error) {
         res.status(400).json({ success: false, body: error });
       }

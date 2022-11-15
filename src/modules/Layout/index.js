@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
             <div className={classes.navigation_label}>Home</div>
           </a>
         </Link>
-        <Link href={`/games/history/${currentYear}`}>
+        <Link href={`/games`}>
           <a
             className={
               classes[

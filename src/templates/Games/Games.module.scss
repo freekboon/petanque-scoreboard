@@ -1,22 +1,23 @@
 @use "src/styles/layout";
 @use "src/styles/typography";
+@use "src/styles/palette";
 
 .container {
   composes: container_md;
   padding-top: 1rem;
 }
 
-.body {
-  composes: body;
-}
-
-.flex {
+.buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+
 }
 
-.card {
-  margin-bottom: 1rem;
+.body {
+  composes: body;
+  color: palette.brand(primary);
 }
 
 .game {

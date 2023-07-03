@@ -9,6 +9,10 @@
 ### Fixed
 - Lorem
 ---
+## [2.0.1] - 03-07-2023
+### Fixed
+- Reverted background color for homescreen icon.
+---
 ## [2.0.0] - 03-07-2023
 ### Changed
 - Disabled registration flow.

@@ -22,13 +22,14 @@ export const authOptions = {
           return false;
         }
 
-        await User.updateOne(
-          { email: token.email },
-          {
-            name: token.name,
-            providerId: token.sub,
-          }
-        );
+        // Disabled improvised registration flow.
+        // await User.updateOne(
+        //   { email: token.email },
+        //   {
+        //     name: token.name,
+        //     providerId: token.sub,
+        //   }
+        // );
 
         token.accessToken = account.access_token;
       }

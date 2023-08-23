@@ -19,6 +19,9 @@ const RoundInput = ({ teams, gameId }) => {
   const addRound = () => {
     return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
       method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      },
       body: JSON.stringify({
         gameId,
         team,
@@ -72,7 +75,7 @@ const RoundInput = ({ teams, gameId }) => {
 
 RoundInput.propTypes = {
   gameId: string.isRequired,
-  teams: arrayOf(arrayOf(object)).isRequired,
+  teams: arrayOf(object).isRequired,
 };
 
 export default RoundInput;

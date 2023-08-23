@@ -19,10 +19,6 @@ const RoundInput = ({ teams, gameId }) => {
   const addRound = () => {
     return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/round`, {
       method: "POST",
-      headers:{
-        "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_BASE_URL}`
-        "Content-Type": "applicatino/json",
-      },
       body: JSON.stringify({
         gameId,
         team,

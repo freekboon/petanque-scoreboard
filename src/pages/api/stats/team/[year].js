@@ -8,7 +8,10 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
       try {
-        const games = await Game.find({});
+        const games = await Game.find({
+          start: { $gte: new Date(year).toISOString() },
+          end: { $exists: true },
+        });
         const allTeams = games.reduce(
           (acc, game) => acc.concat([game.homeTeam, game.guestTeam]),
           []

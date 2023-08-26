@@ -10,6 +10,7 @@ const RoundInput = ({ teams, gameId }) => {
   const [points, setPoints] = useState(0);
   const [team, setTeam] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const clear = () => {
     setPoints(0);
@@ -30,11 +31,13 @@ const RoundInput = ({ teams, gameId }) => {
     });
   };
 
-  const handleAddRound = () =>
+  const handleAddRound = () => {
+    setLoading(true);
     addRound().then(() => {
       router.reload();
       clear();
     });
+  };
 
   return (
     <>
@@ -65,7 +68,7 @@ const RoundInput = ({ teams, gameId }) => {
         <Button variant="outline" onClick={clear}>
           cancel
         </Button>
-        <Button onClick={handleAddRound} disabled={!points || !team}>
+        <Button onClick={handleAddRound} disabled={!points || !team || loading}>
           confirm
         </Button>
       </div>

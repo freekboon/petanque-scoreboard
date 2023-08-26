@@ -11,7 +11,11 @@ const handler = async (req, res) => {
         const games = await Game.find(
           { end: { $exists: true } },
           {},
-          { skip: req.query.page * 16, limit: 16, sort: { start: -1 } }
+          {
+            skip: (parseInt(req.query.page) - 1) * 16,
+            limit: 16,
+            sort: { start: -1 },
+          }
         );
 
         const gamesWithData = await Promise.all(
